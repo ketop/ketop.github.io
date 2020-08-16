@@ -1,4 +1,4 @@
-baseURL: http:localhost:1313
+baseURL: https://ketop.github.io
 theme: pure
 title: Pure theme for Hugo
 defaultContentLanguage: en  # en/zh/...
