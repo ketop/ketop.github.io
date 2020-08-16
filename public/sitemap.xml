@@ -3,89 +3,30 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http:localhost:1313/2020/08/ganster/</loc>
-    <lastmod>2020-08-16T13:50:24+08:00</lastmod>
+    <loc>https://ketop.github.io/about/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ketop.github.io/categories/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http:localhost:1313/posts/</loc>
-    <lastmod>2020-08-16T13:50:24+08:00</lastmod>
+    <loc>https://ketop.github.io/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http:localhost:1313/</loc>
-    <lastmod>2020-08-16T13:50:24+08:00</lastmod>
+    <loc>https://ketop.github.io/series/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http:localhost:1313/2020/08/quite/</loc>
-    <lastmod>2020-08-16T13:21:37+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http:localhost:1313/2020/08/mission/</loc>
-    <lastmod>2020-08-16T13:21:30+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http:localhost:1313/2020/08/gui/</loc>
-    <lastmod>2020-08-16T13:21:19+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http:localhost:1313/2020/08/lastdance/</loc>
-    <lastmod>2020-08-16T13:21:12+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http:localhost:1313/2020/08/start/</loc>
-    <lastmod>2020-08-16T13:21:02+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http:localhost:1313/2020/08/hola/</loc>
-    <lastmod>2020-08-16T13:17:58+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http:localhost:1313/2020/05/some-content/</loc>
-    <lastmod>2020-05-11T22:13:04+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http:localhost:1313/categories/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http:localhost:1313/series/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http:localhost:1313/tags/</loc>
+    <loc>https://ketop.github.io/tags/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
