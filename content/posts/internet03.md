@@ -2,7 +2,7 @@
 title: "IP协议"
 date: 2018-08-16T19:49:14+08:00
 tags: ['tcp/ip', '网络']
-draft: true
+draft: false
 ---
 TCP/IP的心脏是互联网层。该层主要由IP协议与ICMP(Internet Control Message Protocol)两个协议组成。
 

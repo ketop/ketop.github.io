@@ -2,7 +2,7 @@
 title: "网络传输组成要素"
 date: 2018-08-16T19:46:00+08:00
 tags: ['tcp/ip', '网络']
-draft: true
+draft: false
 ---
 ## 网络的组成要素
 1. 中继器
