@@ -1,0 +1,24 @@
+language: go
+go:
+  - 1.8
+branch:
+  only:
+    - hugo
+install:
+  - uname -a
+  - wget https://github.com/gohugoio/hugo/releases/download/v0.74.3/hugo_0.74.3_Linux-64bit.deb
+  - sudo dpkg -i hugo*.deb
+  - hugo version
+  - ls
+  - pwd
+script:
+  - hugo
+deploy:
+  provider: pages
+  skip-cleanup: true
+  local-dir: public
+  target-branch: master
+  github-token:
+  keep-history: true
+  on:
+    branch: hugo
