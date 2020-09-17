@@ -1,6 +1,9 @@
 language: go
 go:
   - 1.8
+branches:
+  only:
+    - master
 install:
   #下载并安装hugo
   - wget https://github.com/gohugoio/hugo/releases/download/v0.74.3/hugo_0.74.3_Linux-64bit.deb
@@ -11,8 +14,8 @@ deploy:
   provider: pages
   skip-cleanup: true
   local-dir: public
-  target-branch: master
+  target-branch: hugo
   github-token: $GITHUB_TOKEN
   keep-history: true
   on:
-    branch: hugo
+    branch: master
