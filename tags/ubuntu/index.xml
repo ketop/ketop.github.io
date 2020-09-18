@@ -13,10 +13,10 @@
     <item>
       <title>使用travis ci自动化发布hugo博客</title>
       <link>https://ketop.github.io/2020/09/2020-09-17-travis-ci/</link>
-      <pubDate>Thu, 17 Sep 2020 20:20:18 +0800</pubDate>
+      <pubDate>Fri, 18 Sep 2020 20:20:18 +0800</pubDate>
       
       <guid>https://ketop.github.io/2020/09/2020-09-17-travis-ci/</guid>
-      <description>hugo博客使用方法 使用hugo命令来生成博客站点的目录结构 在themes目录下安装自己喜欢的主题，例如我这里的Pure 拷贝主题下的toml</description>
+      <description>hugo博客使用方法 使用hugo new site命令来生成博客站点的目录结构 在themes目录下安装自己喜欢的主题，例如我这里的Pure 拷贝主题下</description>
     </item>
     
     <item>
