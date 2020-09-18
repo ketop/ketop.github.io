@@ -39,7 +39,7 @@
 <meta itemprop="description" content="hugo博客使用方法 使用hugo命令来生成博客站点的目录结构 在themes目录下安装自己喜欢的主题，例如我这里的Pure 拷贝主题下的toml">
 <meta itemprop="datePublished" content="2020-09-17T20:20:18+08:00" />
 <meta itemprop="dateModified" content="2020-09-17T20:20:18+08:00" />
-<meta itemprop="wordCount" content="337">
+<meta itemprop="wordCount" content="710">
 
 
 
@@ -299,8 +299,8 @@
 
         <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/2020/09/2020-09-17-travis-ci/#comments"
             class="article-comment-link">Comments</a></span>
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 337words</span>
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 1minutes </span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 710words</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 2minutes </span>
       </div>
     </div>
     <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
@@ -317,6 +317,40 @@
 <p>可以看到，每次写完文章后，需要在本地执行hugo命令，然后推送到github，覆盖某个branch，非常麻烦。之前使用jekyll博客都是直接推送到github上就行了，github自动帮我们编译。</p>
 <p>hugo博客要做到这点，就必须要自动化完成步骤6和7，那么该怎么能自动化呢？答案是 <em>Travis-Ci</em></p>
 <h2 id="travis-ci使用方法">travis ci使用方法</h2>
+<ol>
+<li>使用github账号登陆travis</li>
+<li>选择ketop.github.io的仓库，travis将监听该仓库的动态</li>
+<li>在该项目代码中新增.travis.yml文件，用于定义travis任务</li>
+</ol>
+<pre><code class="language-yaml">language: go
+go:
+  - 1.8
+branches:
+  only:
+    - master
+install:
+  #下载并安装hugo
+  - wget https://github.com/gohugoio/hugo/releases/download/v0.74.3/hugo_0.74.3_Linux-64bit.deb
+  - sudo dpkg -i hugo*.deb
+script:
+  - hugo
+deploy:
+  provider: pages
+  skip-cleanup: true
+  local-dir: public
+  target-branch: hugo
+  github-token: $GITHUB_TOKEN # 设置token用于推送public目录到仓库的ketop.github.io
+  keep-history: true
+  on:
+    branch: master
+</code></pre>
+<p>这样设置后，每次向master中推送新的post后，会触发travis任务。该任务完成以下步骤</p>
+<ol>
+<li>下载hugo的deb包，并使用dpkg命令安装</li>
+<li>使用hugo来编译生成public目录</li>
+<li>deploy中的povider表示部署为github pages。将public目录推送到hugo分支。</li>
+</ol>
+<p>当任务完成后，刷新ketop.github.io就可以看到更新的博客了，效果已经和github的jekyll很像了。</p>
 
     </div>
     <div class="article-footer">
