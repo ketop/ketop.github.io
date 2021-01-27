@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>hugo on Ketop&#39;s Realm</title>
-    <link>https://ketop.github.io/tags/hugo/</link>
-    <description>Recent content in hugo on Ketop&#39;s Realm</description>
+    <title>wsl on Ketop&#39;s Realm</title>
+    <link>https://ketop.github.io/tags/wsl/</link>
+    <description>Recent content in wsl on Ketop&#39;s Realm</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 18 Sep 2020 20:20:18 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 20 Jan 2021 21:45:13 +0000</lastBuildDate>
     
-        <atom:link href="https://ketop.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://ketop.github.io/tags/wsl/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>

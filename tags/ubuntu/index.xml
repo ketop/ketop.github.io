@@ -11,6 +11,15 @@
     
     
     <item>
+      <title>win10 wsl</title>
+      <link>https://ketop.github.io/2021/01/wsl/</link>
+      <pubDate>Wed, 20 Jan 2021 21:45:13 +0000</pubDate>
+      
+      <guid>https://ketop.github.io/2021/01/wsl/</guid>
+      <description>windows wsl可以很方便的让我们在win10中运行各种发行版的linux。但是在使用wsl之后，我安装了很多软件，直接导致在wsl ubuntu中再</description>
+    </item>
+    
+    <item>
       <title>使用travis ci自动化发布hugo博客</title>
       <link>https://ketop.github.io/2020/09/2020-09-17-travis-ci/</link>
       <pubDate>Fri, 18 Sep 2020 20:20:18 +0800</pubDate>
