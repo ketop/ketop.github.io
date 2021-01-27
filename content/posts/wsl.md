@@ -1,7 +1,7 @@
 ---
 title: win10 wsl
 date: 2021-01-20 21:45:13 
-tags: [wsl]
+tags: ['wsl']
 draft: false
 ---
 windows wsl可以很方便的让我们在win10中运行各种发行版的linux。但是在使用wsl之后，我安装了很多软件，直接导致在wsl ubuntu中再使用apt来安装软件后，C盘直接变红了。
