@@ -6,11 +6,7 @@
     <!-- {{- print ($.Scratch.Get "pages") }} -->
     {{ $paginator := .Paginate ($.Scratch.Get "pages") }}
     {{ range $paginator.Pages }}
-    <article
-      class="article article-type-page"
-      itemscope
-      itemtype="http://schema.org/BlogPosting"
-    >
+    <article class="article article-type-page" itemscope itemtype="http://schema.org/BlogPosting">
       <div class="article-header">
         {{- .Scratch.Set "class_name" "article-title" }}
         {{ partial "post/title.html" . -}}
@@ -29,7 +25,8 @@
         {{- partial "post/date.html" . }}
         {{- partial "post/category.html" . }}
         {{- partial "post/tag.html" . }}
-        <span class="post-comment"><i class="icon icon-comment"></i> &nbsp;<a href="{{- .RelPermalink }}#comments" class="article-comment-link">{{- T "article_comments" }}</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> &nbsp;<a href="{{- .RelPermalink }}#comments"
+            class="article-comment-link">{{- T "article_comments" }}</a></span>
         {{- partial "post/wc.html" . }}
       </p>
     </article>
@@ -38,4 +35,3 @@
   {{ partial "pagination.html" . }}
 </main>
 {{- end }}
-
