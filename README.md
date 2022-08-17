@@ -3,4 +3,4 @@
 
 ## 特色
 - 使用hugo server打造的个人博客
-- travis-CI自动构建部署
+- travis-CI自动构建部署(travisci.com)
