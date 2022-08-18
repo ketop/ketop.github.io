@@ -1,0 +1,435 @@
+<!doctype html><html lang=en>
+<head>
+<title>
+C++拷贝构造函数 - Ketop's Realm
+</title>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+<meta name=renderer content="webkit">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="black">
+<meta name=format-detection content="telephone=no,email=no,adress=no">
+<meta name=theme-color content="#000000">
+<meta http-equiv=window-target content="_top">
+<meta name=description content="当定义一个类时， 我们显式地或隐式地指定在此类型的对象拷贝、移动、赋值和销毁时做什么。一个类通过定义五种特殊的成员函数来控制这些对象， 包括： 拷">
+<meta name=generator content="Hugo 0.91.2 with theme pure">
+<title>C++拷贝构造函数 - Ketop's Realm</title>
+<link rel=stylesheet href=https://ketop.github.io/css/style.min.c58e22f1aa6179cd5cb60b9e08421a2b9a9c9fe9352d095e051b51aae209e5c0.css>
+<link rel=stylesheet href=https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css async>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css async>
+<meta property="og:title" content="C++拷贝构造函数">
+<meta property="og:description" content="当定义一个类时， 我们显式地或隐式地指定在此类型的对象拷贝、移动、赋值和销毁时做什么。一个类通过定义五种特殊的成员函数来控制这些对象， 包括： 拷">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ketop.github.io/2018/08/2020-04-05-c-%E8%AF%AD%E6%B3%952/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2018-08-16T20:25:01+08:00">
+<meta property="article:modified_time" content="2018-08-16T20:25:01+08:00">
+<meta itemprop=name content="C++拷贝构造函数">
+<meta itemprop=description content="当定义一个类时， 我们显式地或隐式地指定在此类型的对象拷贝、移动、赋值和销毁时做什么。一个类通过定义五种特殊的成员函数来控制这些对象， 包括： 拷"><meta itemprop=datePublished content="2018-08-16T20:25:01+08:00">
+<meta itemprop=dateModified content="2018-08-16T20:25:01+08:00">
+<meta itemprop=wordCount content="2200">
+<meta itemprop=keywords content="c/c++,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="C++拷贝构造函数">
+<meta name=twitter:description content="当定义一个类时， 我们显式地或隐式地指定在此类型的对象拷贝、移动、赋值和销毁时做什么。一个类通过定义五种特殊的成员函数来控制这些对象， 包括： 拷"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body class="main-center theme-black" itemscope itemtype=http://schema.org/WebPage><header class=header itemscope itemtype=http://schema.org/WPHeader>
+<div class=slimContent>
+<div class=navbar-header>
+<div class="profile-block text-center">
+<a id=avatar href=https://github.com/ketop target=_blank>
+<img class="img-circle img-rotate" src=https://ketop.github.io/avatar.png width=200 height=200>
+</a>
+<h2 id=name class="hidden-xs hidden-sm">ketop</h2>
+<h3 id=title class="hidden-xs hidden-sm hidden-md">Happy work,happy life.</h3>
+<small id=location class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Nanjing, China</small>
+</div><div class=search id=search-form-wrap>
+<form class="search-form sidebar-form">
+<div class=input-group>
+<input type=text class="search-form-input form-control" placeholder=Search>
+<span class=input-group-btn>
+<button type=submit class="search-form-submit btn btn-flat" onclick=return!1><i class="icon icon-search"></i></button>
+</span>
+</div>
+<div class=ins-search>
+<div class=ins-search-mask></div>
+<div class=ins-search-container>
+<div class=ins-input-wrapper>
+<input type=text class=ins-search-input placeholder="Type something..." x-webkit-speech>
+<button type=button class="close ins-close ins-selectable" data-dismiss=modal aria-label=Close><span aria-hidden=true>×</span></button>
+</div>
+<div class=ins-section-wrapper>
+<div class=ins-section-container></div>
+</div>
+</div>
+</div>
+</form>
+</div>
+<button class="navbar-toggle collapsed" type=button data-toggle=collapse data-target=#main-navbar aria-controls=main-navbar aria-expanded=false>
+<span class=sr-only>Toggle navigation</span>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+</button>
+</div>
+<nav id=main-navbar class="collapse navbar-collapse" itemscope itemtype=http://schema.org/SiteNavigationElement role=navigation>
+<ul class="nav navbar-nav main-nav">
+<li class="menu-item menu-item-home">
+<a href=/>
+<i class="icon icon-home-fill"></i>
+<span class=menu-title>Home</span>
+</a>
+</li>
+<li class="menu-item menu-item-archives">
+<a href=/posts/>
+<i class="icon icon-archives-fill"></i>
+<span class=menu-title>Archives</span>
+</a>
+</li>
+<li class="menu-item menu-item-categories">
+<a href=/categories/>
+<i class="icon icon-folder"></i>
+<span class=menu-title>Categories</span>
+</a>
+</li>
+<li class="menu-item menu-item-tags">
+<a href=/tags/>
+<i class="icon icon-tags"></i>
+<span class=menu-title>Tags</span>
+</a>
+</li>
+<li class="menu-item menu-item-about">
+<a href=/about/>
+<i class="icon icon-cup-fill"></i>
+<span class=menu-title>About</span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</header>
+<aside class=sidebar itemscope itemtype=http://schema.org/WPSideBar>
+<div class=slimContent>
+<div class=widget>
+<h3 class=widget-title>Board</h3>
+<div class=widget-body>
+<div id=board>
+<div class=content><p>enjoy~</p>
+</div>
+</div>
+</div>
+</div>
+<div class=widget>
+<h3 class=widget-title> Categories</h3>
+<div class=widget-body>
+<ul class=category-list>
+</ul>
+</div>
+</div>
+<div class=widget>
+<h3 class=widget-title> Tags</h3>
+<div class=widget-body>
+<ul class=tag-list>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/c/c++/ class=tag-list-link>c/c++</a><span class=tag-list-count>5</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/github/ class=tag-list-link>github</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/hugo/ class=tag-list-link>hugo</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/psqlodbc/ class=tag-list-link>psqlodbc</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/sqlbindparameter/ class=tag-list-link>sqlbindparameter</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/tcp/ip/ class=tag-list-link>tcp/ip</a><span class=tag-list-count>3</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/travis-ci/ class=tag-list-link>travis-ci</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/ubuntu/ class=tag-list-link>ubuntu</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/unixodbc/ class=tag-list-link>unixodbc</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/wsl/ class=tag-list-link>wsl</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/%E7%BD%91%E7%BB%9C/ class=tag-list-link>网络</a><span class=tag-list-count>3</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/ class=tag-list-link>设计模式</a><span class=tag-list-count>1</span></li>
+</ul>
+</div>
+</div>
+<div class=widget>
+<h3 class=widget-title>Recent Posts</h3>
+<div class=widget-body>
+<ul class="recent-post-list list-unstyled no-thumbnail">
+<li>
+<div class=item-inner>
+<p class=item-title>
+<a href=https://ketop.github.io/2022/08/psqlodbc/ class=title>UTF8字符解析错误PG执行失败</a>
+</p>
+<p class=item-date>
+<time datetime="2022-08-17 20:25:01 +0800 +0800" itemprop=datePublished>2022-08-17</time>
+</p>
+</div>
+</li>
+<li>
+<div class=item-inner>
+<p class=item-title>
+<a href=https://ketop.github.io/2021/04/singleton/ class=title>设计模式-单例模式</a>
+</p>
+<p class=item-date>
+<time datetime="2021-04-26 00:04:47 +0800 +0800" itemprop=datePublished>2021-04-26</time>
+</p>
+</div>
+</li>
+<li>
+<div class=item-inner>
+<p class=item-title>
+<a href=https://ketop.github.io/2021/01/wsl/ class=title>win10 wsl</a>
+</p>
+<p class=item-date>
+<time datetime="2021-01-20 21:45:13 +0000 UTC" itemprop=datePublished>2021-01-20</time>
+</p>
+</div>
+</li>
+<li>
+<div class=item-inner>
+<p class=item-title>
+<a href=https://ketop.github.io/2020/12/callable/ class=title>C++可调用对象</a>
+</p>
+<p class=item-date>
+<time datetime="2020-12-07 22:30:07 +0800 +0800" itemprop=datePublished>2020-12-07</time>
+</p>
+</div>
+</li>
+<li>
+<div class=item-inner>
+<p class=item-title>
+<a href=https://ketop.github.io/2020/09/2020-09-17-travis-ci/ class=title>使用travis ci自动化发布hugo博客</a>
+</p>
+<p class=item-date>
+<time datetime="2020-09-18 20:20:18 +0800 +0800" itemprop=datePublished>2020-09-18</time>
+</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</aside>
+<aside class="sidebar sidebar-toc collapse" id=collapseToc itemscope itemtype=http://schema.org/WPSideBar>
+<div class=slimContent>
+<h4 class=toc-title>Catalogue</h4>
+<nav id=toc class="js-toc toc">
+</nav>
+</div>
+</aside>
+<main class=main role=main><div class=content>
+<article id=- class="article article-type-" itemscope itemtype=http://schema.org/BlogPosting>
+<div class=article-header>
+<h1 itemprop=name>
+<a class=article-title href=/2018/08/2020-04-05-c-%E8%AF%AD%E6%B3%952/>C++拷贝构造函数</a>
+</h1>
+<div class=article-meta>
+<span class=article-date>
+<i class="icon icon-calendar-check"></i>&nbsp;
+<a href=https://ketop.github.io/2018/08/2020-04-05-c-%E8%AF%AD%E6%B3%952/ class=article-date>
+<time datetime="2018-08-16 20:25:01 +0800 +0800" itemprop=datePublished>2018-08-16</time>
+</a>
+</span>
+<span class=article-tag>
+<i class="icon icon-tags"></i>&nbsp;
+<a class=article-tag-link href=/tags/c/c++/> c/c++ </a>
+</span>
+<span class=post-comment><i class="icon icon-comment"></i>&nbsp;<a href=/2018/08/2020-04-05-c-%E8%AF%AD%E6%B3%952/#comments class=article-comment-link>Comments</a></span>
+<span class="post-wordcount hidden-xs" itemprop=wordCount>Word Count: 2200words</span>
+<span class="post-readcount hidden-xs" itemprop=timeRequired>Read Count: 5minutes </span>
+</div>
+</div>
+<div class="article-entry marked-body js-toc-content" itemprop=articleBody>
+<p>当定义一个类时， 我们显式地或隐式地指定在此类型的对象拷贝、移动、赋值和销毁时做什么。一个类通过定义五种特殊的成员函数来控制这些对象， 包括：</p>
+<ul>
+<li>拷贝构造函数</li>
+<li>拷贝赋值运算符</li>
+<li>移动构造函数</li>
+<li>移动赋值运算符</li>
+<li>析构函数</li>
+</ul>
+<p>拷贝和移动构造函数定义了当用同类型的另一个对象初始化本对象时做什么；拷贝和移动赋值运算符定义了将一个对象赋予同类型的另一个对象时做什么；析构函数定义了当此类型对象销毁时做什么。我们称这些操作为拷贝控制操作。</p>
+<h3 id=拷贝构造函数>拷贝构造函数</h3>
+<pre><code class=language-c++> class Foo {
+ public:
+ 	Foo(); //默认构造函数
+ 	Foo(const Foo&amp;);// 拷贝构造函数
+ 	//...
+ };
+ /*
+   * 拷贝构造函数的第一个参数几乎总是一个自身类型的const引用
+   * 拷贝构造函数在几种情况下都会被隐式地使用，因此构造函数
+  * 通常不应该是explicity的
+  */
+</code></pre>
+<h4 id=合成拷贝构造函数>合成拷贝构造函数</h4>
+<p>如果我们没有为一个类定义拷贝构造函数，编译器会为我们定义一个。与合成默认构造函数不同， 即使我们定义了其他构造函数，编译器也会为我们合成一个拷贝构造函数。
+一般情况下，合成的拷贝构造函数会将其参数的成员逐个拷贝到正在创建的对象中。编译器从给定的对象中依次将每个非static成员拷贝到正在创建的对象中。
+每个成员的类型决定了它如何拷贝: 对类类型的成员，会使用其拷贝构造函数来拷贝；内置类型的成员则直接拷贝。对于数组成员，合成拷贝构造函数会逐元素地拷贝一个数组类型的成员。如果数组元素为类类型，则使用元素的拷贝构造函数来进行拷贝。</p>
+<pre><code class=language-c++>class Sales_data {
+public:
+	//其他成员和构造函数的定义，与以前一致
+	//与合成拷贝构造函数等价的拷贝构造函数
+	Sales_data(const Sales_data &amp;);
+private:
+	std::string bookNo;
+	unsigned units_sold - 0;
+	double revenue = 0.0;
+};
+ 
+//与合成的拷贝构造函数等价的拷贝构造函数
+Sales_data::Sales_data(const Sales_data &amp;orig):
+	bookNo(orig.bookNo), units_sold(orig.units_sold), revenue(orig.revenue)
+{
+ // empty
+}
+</code></pre>
+<p>拷贝初始化与值初始化的区别</p>
+<pre><code class=language-c++>string dots(1o, '.');//直接初始化
+string s(dots);//直接初始化
+string s2 = dots;//拷贝初始化
+string null_book = &quot;9-999-99999-9&quot;;//拷贝初始化
+string nines = string(100, '9');//拷贝初始化
+</code></pre>
+<p>当使用直接初始化时，实际上是编译器使用普通的函数匹配来选择与我们提供的参数最匹配的构造函数。当使用拷贝初始化时，我们要求将右侧运算对象拷贝到正在创建的对象中，如果需要的话将进行类型转换。
+拷贝初始化通常使用拷贝构造函数来完成。但是，如果一个类有一个移动构造函数，则拷贝初始化有时会使用移动构造函数而非拷贝构造函数来完成。</p>
+<p>拷贝初始化不仅在我们用=定义变量时会发生，下列情况也会发生
+• 将一个对象作为实参传递给一个非引用类型的形参
+• 从一个返回类型为非引用类型的函数返回一个对象
+• 用花括号列表初始化一个数组中的元素或一个聚合类中的成员。
+• 某些类类型会对它们所分配的对象使用拷贝初始化。例如初始化标准容器或是调用其insert和push成员事，容器会对其元素进行拷贝初始化，与之相对的，用emplace成员创建的元素都进行直接初始化。</p>
+<h3 id=拷贝赋值运算符>拷贝赋值运算符</h3>
+<pre><code class=language-c++>class Foo {
+public:
+	Foo&amp; operator=(const Foo &amp;);//赋值运算符
+	//..
+};
+</code></pre>
+<h4 id=合成拷贝赋值运算符>合成拷贝赋值运算符</h4>
+<p>与处理拷贝构造函数一样，如果一个类未定义自己的拷贝赋值运算符，编译器会为它生成一个合成拷贝赋值运算符。通常情况下，它将右侧运算对象的每个非static成员赋予左侧运算对象对应的成员，这一工作是通过成员类型的拷贝赋值运算符来完成的。对于数组类型的成员，逐个赋值数组元素。合成拷贝赋值运算符返回一个指向其左侧运算对象的引用。</p>
+<pre><code class=language-c++>/*等价于合成拷贝赋值运算符*/
+Sales_data&amp; Sales_data::operator=(const Sales_data &amp;rhs)
+{
+	bookNo = rhs.bookNo; //调用string::operator=
+	units_sold = rhs.units_sold;//内置的int赋值
+	revenue = rhs.revenue;//内置的double赋值
+	return *this;
+}
+</code></pre>
+<h3 id=析构函数>析构函数</h3>
+<p>析构函数执行与构造函数相反的操作：构造函数初始化对象的非static数据成员，还可能做一些其他工作；析构函数释放对象使用的资源，并销毁对象的非static数据成员。</p>
+<pre><code class=language-c++>class Foo {
+public:
+	~Foo();//析构函数
+	//...
+};
+</code></pre>
+<p>析构函数没有返回值，也不接受参数。由于析构函数不接受参数，因此它不能被重载。对于一个给定类，只有唯一一个析构函数。
+在一个构造函数中，成员初始化是在函数体执行之前完成的，且按照它们在类中出现的顺序进行初始化。在一个析构函数中，首先执行函数体，然后销毁成员。成员按初始化顺序的逆序销毁。
+在对象最后一次使用后，析构函数的函数体可执行类设计者希望执行的任何收尾工作。通常，析构函数释放对象在生存期分配的所有资源。在析构函数中不存在类似于构造函数中初始化列表的东西来控制成员如何销毁，析构部分是隐式的。成员销毁时完全以来于成员的类型。销毁类类型成员会执行其对应的析构函数。内置类型没有析构函数，因此销毁内置类型成员什么也不需要做。与普通指针不同，智能指针是类类型，所以具有析构函数，因此与普通指针不同，智能指针成员在析构阶段会被自动销毁。</p>
+<p>析构函数在对象被销毁时自动调用。
+• 变量离开其作用域时被销毁
+• 当一个对象被销毁时，其成员被销毁
+• 容器（无论是标准容器还是数组）被销毁时，其元素被销毁
+• 对于动态分配的对象，当对指向它的指针应用delete运算符时被销毁
+• 对于临时对象，当创建它的完整表达式结束时被销毁</p>
+<h4 id=合成析构函数>合成析构函数</h4>
+<p>当一个类未定义自己的析构函数时，编译器会为它定义一个合成析构函数。通常情况下，合成的析构函数体为空。对于某些类，合成析构函数被用来阻止该类型的对象被销毁。析构函数体自身并不直接销毁成员，成员是在函数体执行之后隐含的析构阶段中被销毁的。在整个对象销毁过程中，析构函数体是作为成员销毁步骤之外的另一部分而进行的。</p>
+</div>
+<div class=article-footer>
+<blockquote class=mt-2x>
+<ul class="post-copyright list-unstyled">
+<li class="post-copyright-link hidden-xs">
+<strong>Permalink: </strong>
+<a href=https://ketop.github.io/2018/08/2020-04-05-c-%E8%AF%AD%E6%B3%952/ title=C++拷贝构造函数 target=_blank rel=external>https://ketop.github.io/2018/08/2020-04-05-c-%E8%AF%AD%E6%B3%952/</a>
+</li>
+<li class=post-copyright-license>
+<strong>License：</strong><a href=http://creativecommons.org/licenses/by/4.0/deed.zh target=_blank rel=external>CC BY 4.0 CN</a>
+</li>
+</ul>
+</blockquote>
+<div class="panel panel-default panel-badger">
+<div class=panel-body>
+<figure class=media>
+<div class=media-left>
+<a href=https://github.com/ketop target=_blank class="img-burn thumb-sm visible-lg">
+<img src=https://ketop.github.io/avatar.png class="img-rounded w-full" alt>
+</a>
+</div>
+<div class=media-body>
+<h3 class=media-heading><a href=https://github.com/ketop target=_blank><span class=text-dark>ketop</span><small class=ml-1x>Happy work,happy life.</small></a></h3>
+<div>Keep hungry, keep foolish.</div>
+</div>
+</figure>
+</div>
+</div>
+</div>
+</article>
+<section id=comments>
+<div id=vcomments></div>
+</section>
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+<div class=bar-inner>
+<ul class="pager pull-left">
+<li class=prev>
+<a href=https://ketop.github.io/2018/08/2020-04-05-c-%E8%AF%AD%E6%B3%95/ title=C++移动构造函数><i class="icon icon-angle-left" aria-hidden=true></i><span>&nbsp;&nbsp;Older</span></a>
+</li>
+<li class=next>
+<a href=https://ketop.github.io/2019/04/cpp_instance/ title=C++控制类对象实例化仅在栈或者堆上的方法><span>Newer&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden=true></i></a>
+</li>
+<li class=toggle-toc>
+<a class="toggle-btn collapsed" data-toggle=collapse href=#collapseToc aria-expanded=false title=Catalogue role=button>
+<span>[&nbsp;</span><span>Catalogue</span>
+<i class="text-collapsed icon icon-anchor"></i>
+<i class="text-in icon icon-close"></i>
+<span>]</span>
+</a>
+</li>
+</ul>
+<div class=bar-right>
+<div class=share-component data-sites=weibo,qq,wechat,facebook,twitter data-mobile-sites=weibo,qq,qzone></div>
+</div>
+</div>
+</nav>
+</main><footer class=footer itemscope itemtype=http://schema.org/WPFooter>
+<ul class=social-links>
+<li><a href=https://github.com/ketop target=_blank title=github data-toggle=tooltip data-placement=top>
+<i class="icon icon-github"></i></a></li>
+<li><a href=https://ketop.github.io/index.xml target=_blank title=rss data-toggle=tooltip data-placement=top>
+<i class="icon icon-rss"></i></a></li>
+<li><a href=http://weibo.com/duke47 target=_blank title=weibo data-toggle=tooltip data-placement=top>
+<i class="icon icon-weibo"></i></a></li>
+</ul>
+<div class=copyright>
+&copy;2017 -
+2022
+<div class=publishby>
+Theme by <a href=https://github.com/xiaoheiAh target=_blank> xiaoheiAh </a>base on<a href=https://github.com/xiaoheiAh/hugo-theme-pure target=_blank> pure</a>.
+</div>
+</div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type=text/x-mathjax-config>
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+<script async src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script>
+<script>mermaid.initialize({startOnLoad:!0})</script>
+<script>Array.from(document.getElementsByClassName('language-mermaid')).forEach(a=>{a.parentElement.outerHTML=`<div class="mermaid">${a.innerText}</div>`})</script>
+<style>.mermaid svg{display:block;margin:auto}</style>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js></script>
+<script>window.jQuery||document.write('<script src="js/jquery.min.js"><\/script>')</script>
+<script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js></script>
+<script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js defer></script>
+<script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js defer></script><script>hljs.configure({tabReplace:'    ',classPrefix:''}),hljs.initHighlightingOnLoad()</script>
+<script src=https://ketop.github.io/js/application.min.a94ab19cb63a95c8d7fbd7b85cab3ddeea8c369bdf75b9cab6708787ead123af.js></script>
+<script src=https://ketop.github.io/js/plugin.min.19c5bcb2fb0789ab4f2b7834e5ceb5e92635645605bab902c1024b25f1502364.js></script>
+<script>(function(a){var b={TRANSLATION:{POSTS:'Posts',PAGES:'Pages',CATEGORIES:'Categories',TAGS:'Tags',UNTITLED:'(Untitled)'},ROOT_URL:'https://ketop.github.io',CONTENT_URL:'https://ketop.github.io/searchindex.json '};a.INSIGHT_CONFIG=b})(window)</script>
+<script type=text/javascript src=https://ketop.github.io/js/insight.min.4a2d52de4bfff73e0c688404fe3d17c9a3ae12d9888e1e1ac9c690e4890de2ded50fe55f2b819c2ba55435a76f396f3ea6805765f0b0af5635cdf74ea459eab0.js defer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js></script>
+<script>tocbot.init({tocSelector:'.js-toc',contentSelector:'.js-toc-content',headingSelector:'h1, h2, h3',hasInnerContainers:!0})</script>
+<script src=https://cdn1.lncld.net/static/js/3.0.4/av-min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/valine></script>
+<script type=text/javascript>var GUEST=['nick','mail','link'],meta='nick,mail';meta=meta.split(',').filter(function(a){return GUEST.indexOf(a)>-1}),new Valine({el:'#vcomments',verify:null,notify:null,appId:'PckM8uefuLOV4IdD8e5jejur-gzGzoHsz',appKey:'I7jd25YaeamuXrH0Q7L1YmR1',placeholder:'useful~',avatar:'mm',meta,pageSize:'10'||10,visitor:!1})</script>
+</body>
+</html>

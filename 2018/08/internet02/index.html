@@ -1,0 +1,409 @@
+<!doctype html><html lang=en>
+<head>
+<title>
+交换机网关 - Ketop's Realm
+</title>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+<meta name=renderer content="webkit">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="black">
+<meta name=format-detection content="telephone=no,email=no,adress=no">
+<meta name=theme-color content="#000000">
+<meta http-equiv=window-target content="_top">
+<meta name=description content="TCP是面向连接的协议，它提供持续可交付的可靠连接。充分实现了数据传输时的各种控制功能，可以进行丢包时的重发控制，还可以对次序乱掉的分包进行">
+<meta name=generator content="Hugo 0.91.2 with theme pure">
+<title>交换机网关 - Ketop's Realm</title>
+<link rel=stylesheet href=https://ketop.github.io/css/style.min.c58e22f1aa6179cd5cb60b9e08421a2b9a9c9fe9352d095e051b51aae209e5c0.css>
+<link rel=stylesheet href=https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css async>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css async>
+<meta property="og:title" content="交换机网关">
+<meta property="og:description" content="TCP是面向连接的协议，它提供持续可交付的可靠连接。充分实现了数据传输时的各种控制功能，可以进行丢包时的重发控制，还可以对次序乱掉的分包进行">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ketop.github.io/2018/08/internet02/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2018-08-16T19:48:06+08:00">
+<meta property="article:modified_time" content="2018-08-16T19:48:06+08:00">
+<meta itemprop=name content="交换机网关">
+<meta itemprop=description content="TCP是面向连接的协议，它提供持续可交付的可靠连接。充分实现了数据传输时的各种控制功能，可以进行丢包时的重发控制，还可以对次序乱掉的分包进行"><meta itemprop=datePublished content="2018-08-16T19:48:06+08:00">
+<meta itemprop=dateModified content="2018-08-16T19:48:06+08:00">
+<meta itemprop=wordCount content="1965">
+<meta itemprop=keywords content="tcp/ip,网络,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="交换机网关">
+<meta name=twitter:description content="TCP是面向连接的协议，它提供持续可交付的可靠连接。充分实现了数据传输时的各种控制功能，可以进行丢包时的重发控制，还可以对次序乱掉的分包进行"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body class="main-center theme-black" itemscope itemtype=http://schema.org/WebPage><header class=header itemscope itemtype=http://schema.org/WPHeader>
+<div class=slimContent>
+<div class=navbar-header>
+<div class="profile-block text-center">
+<a id=avatar href=https://github.com/ketop target=_blank>
+<img class="img-circle img-rotate" src=https://ketop.github.io/avatar.png width=200 height=200>
+</a>
+<h2 id=name class="hidden-xs hidden-sm">ketop</h2>
+<h3 id=title class="hidden-xs hidden-sm hidden-md">Happy work,happy life.</h3>
+<small id=location class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Nanjing, China</small>
+</div><div class=search id=search-form-wrap>
+<form class="search-form sidebar-form">
+<div class=input-group>
+<input type=text class="search-form-input form-control" placeholder=Search>
+<span class=input-group-btn>
+<button type=submit class="search-form-submit btn btn-flat" onclick=return!1><i class="icon icon-search"></i></button>
+</span>
+</div>
+<div class=ins-search>
+<div class=ins-search-mask></div>
+<div class=ins-search-container>
+<div class=ins-input-wrapper>
+<input type=text class=ins-search-input placeholder="Type something..." x-webkit-speech>
+<button type=button class="close ins-close ins-selectable" data-dismiss=modal aria-label=Close><span aria-hidden=true>×</span></button>
+</div>
+<div class=ins-section-wrapper>
+<div class=ins-section-container></div>
+</div>
+</div>
+</div>
+</form>
+</div>
+<button class="navbar-toggle collapsed" type=button data-toggle=collapse data-target=#main-navbar aria-controls=main-navbar aria-expanded=false>
+<span class=sr-only>Toggle navigation</span>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+</button>
+</div>
+<nav id=main-navbar class="collapse navbar-collapse" itemscope itemtype=http://schema.org/SiteNavigationElement role=navigation>
+<ul class="nav navbar-nav main-nav">
+<li class="menu-item menu-item-home">
+<a href=/>
+<i class="icon icon-home-fill"></i>
+<span class=menu-title>Home</span>
+</a>
+</li>
+<li class="menu-item menu-item-archives">
+<a href=/posts/>
+<i class="icon icon-archives-fill"></i>
+<span class=menu-title>Archives</span>
+</a>
+</li>
+<li class="menu-item menu-item-categories">
+<a href=/categories/>
+<i class="icon icon-folder"></i>
+<span class=menu-title>Categories</span>
+</a>
+</li>
+<li class="menu-item menu-item-tags">
+<a href=/tags/>
+<i class="icon icon-tags"></i>
+<span class=menu-title>Tags</span>
+</a>
+</li>
+<li class="menu-item menu-item-about">
+<a href=/about/>
+<i class="icon icon-cup-fill"></i>
+<span class=menu-title>About</span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</header>
+<aside class=sidebar itemscope itemtype=http://schema.org/WPSideBar>
+<div class=slimContent>
+<div class=widget>
+<h3 class=widget-title>Board</h3>
+<div class=widget-body>
+<div id=board>
+<div class=content><p>enjoy~</p>
+</div>
+</div>
+</div>
+</div>
+<div class=widget>
+<h3 class=widget-title> Categories</h3>
+<div class=widget-body>
+<ul class=category-list>
+</ul>
+</div>
+</div>
+<div class=widget>
+<h3 class=widget-title> Tags</h3>
+<div class=widget-body>
+<ul class=tag-list>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/c/c++/ class=tag-list-link>c/c++</a><span class=tag-list-count>5</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/github/ class=tag-list-link>github</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/hugo/ class=tag-list-link>hugo</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/psqlodbc/ class=tag-list-link>psqlodbc</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/sqlbindparameter/ class=tag-list-link>sqlbindparameter</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/tcp/ip/ class=tag-list-link>tcp/ip</a><span class=tag-list-count>3</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/travis-ci/ class=tag-list-link>travis-ci</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/ubuntu/ class=tag-list-link>ubuntu</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/unixodbc/ class=tag-list-link>unixodbc</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/wsl/ class=tag-list-link>wsl</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/%E7%BD%91%E7%BB%9C/ class=tag-list-link>网络</a><span class=tag-list-count>3</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/ class=tag-list-link>设计模式</a><span class=tag-list-count>1</span></li>
+</ul>
+</div>
+</div>
+<div class=widget>
+<h3 class=widget-title>Recent Posts</h3>
+<div class=widget-body>
+<ul class="recent-post-list list-unstyled no-thumbnail">
+<li>
+<div class=item-inner>
+<p class=item-title>
+<a href=https://ketop.github.io/2022/08/psqlodbc/ class=title>UTF8字符解析错误PG执行失败</a>
+</p>
+<p class=item-date>
+<time datetime="2022-08-17 20:25:01 +0800 +0800" itemprop=datePublished>2022-08-17</time>
+</p>
+</div>
+</li>
+<li>
+<div class=item-inner>
+<p class=item-title>
+<a href=https://ketop.github.io/2021/04/singleton/ class=title>设计模式-单例模式</a>
+</p>
+<p class=item-date>
+<time datetime="2021-04-26 00:04:47 +0800 +0800" itemprop=datePublished>2021-04-26</time>
+</p>
+</div>
+</li>
+<li>
+<div class=item-inner>
+<p class=item-title>
+<a href=https://ketop.github.io/2021/01/wsl/ class=title>win10 wsl</a>
+</p>
+<p class=item-date>
+<time datetime="2021-01-20 21:45:13 +0000 UTC" itemprop=datePublished>2021-01-20</time>
+</p>
+</div>
+</li>
+<li>
+<div class=item-inner>
+<p class=item-title>
+<a href=https://ketop.github.io/2020/12/callable/ class=title>C++可调用对象</a>
+</p>
+<p class=item-date>
+<time datetime="2020-12-07 22:30:07 +0800 +0800" itemprop=datePublished>2020-12-07</time>
+</p>
+</div>
+</li>
+<li>
+<div class=item-inner>
+<p class=item-title>
+<a href=https://ketop.github.io/2020/09/2020-09-17-travis-ci/ class=title>使用travis ci自动化发布hugo博客</a>
+</p>
+<p class=item-date>
+<time datetime="2020-09-18 20:20:18 +0800 +0800" itemprop=datePublished>2020-09-18</time>
+</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</aside>
+<aside class="sidebar sidebar-toc collapse" id=collapseToc itemscope itemtype=http://schema.org/WPSideBar>
+<div class=slimContent>
+<h4 class=toc-title>Catalogue</h4>
+<nav id=toc class="js-toc toc">
+</nav>
+</div>
+</aside>
+<main class=main role=main><div class=content>
+<article id=- class="article article-type-" itemscope itemtype=http://schema.org/BlogPosting>
+<div class=article-header>
+<h1 itemprop=name>
+<a class=article-title href=/2018/08/internet02/>交换机网关</a>
+</h1>
+<div class=article-meta>
+<span class=article-date>
+<i class="icon icon-calendar-check"></i>&nbsp;
+<a href=https://ketop.github.io/2018/08/internet02/ class=article-date>
+<time datetime="2018-08-16 19:48:06 +0800 +0800" itemprop=datePublished>2018-08-16</time>
+</a>
+</span>
+<span class=article-tag>
+<i class="icon icon-tags"></i>&nbsp;
+<a class=article-tag-link href=/tags/tcp/ip/> tcp/ip </a>
+<a class=article-tag-link href=/tags/%E7%BD%91%E7%BB%9C/> 网络 </a>
+</span>
+<span class=post-comment><i class="icon icon-comment"></i>&nbsp;<a href=/2018/08/internet02/#comments class=article-comment-link>Comments</a></span>
+<span class="post-wordcount hidden-xs" itemprop=wordCount>Word Count: 1965words</span>
+<span class="post-readcount hidden-xs" itemprop=timeRequired>Read Count: 4minutes </span>
+</div>
+</div>
+<div class="article-entry marked-body js-toc-content" itemprop=articleBody>
+<p>TCP是面向连接的协议，它提供持续可交付的可靠连接。充分实现了数据传输时的各种控制功能，可以进行丢包时的重发控制，还可以对次序乱掉的分包进行顺序控制。TCP只有在确认通信对端存在时才会发送数据，从而可以控制通信流量的浪费。</p>
+<ul>
+<li>通过序列号与确认应答提高可靠性。 当发送端的数据到达主机时，接收端主机会返回一个已收到消息的通知，该消息称为<em>确认应答(ACK)</em>。</li>
+</ul>
+<blockquote>
+<p>如果收到了ACK，表示数据已经成功送达。当没有收到ACK时，有可能是数据丢失，或者ACK在返回时丢失，此外还有可能是因为其他原因而延迟到达。 这时，主机可能会重发数据。这种重发机制能保证数据不丢失。但是，如果数据已经到达，只是ACK没有接收到，则重发会给接收端带来负担。它需要一种机制，使接收端识别是否已经收到数据，又能判断是否需要接收。</p>
+</blockquote>
+<blockquote>
+<p>这些需要的功能可以通过序列号实现。序列号是按顺序给发送数据的每个字节都标上号码的编号。接收端查询接收数据TCP首部的序列号和数据长度，将自己下一步应该接收的序号作为确认应答返送回去。这样通过序列号和确认应答号，TCP可以实现可靠传输。</p>
+</blockquote>
+<ul>
+<li>重发超时的确定。 重发超时是指在重发数据之前，等待确认应答到来的那个特定时间间隔。如果超过了指定时间仍未收到确认应答，发送端将进行数据重发。 TCP在每次发包时，会计算往返时间及其偏差。</li>
+</ul>
+<blockquote>
+<p>往返时间，指报文段的往返时间。 Round Trip Time, RTT。</p>
+</blockquote>
+<blockquote>
+<p>偏差， RTT时间波动的值、方差。有时也称抖动。一般设置的重发超时 时间以0.5s为单位，是其整数倍。偏差的最小值也是0.5,因此最小的重发时间为1s。初始通信的重发超时时间为6s。如果重发后仍没有ACK，则进行再次发送，此时，等待确认应答时间将会以2倍、4倍的指数函数延长。在达到一定重发次数后，如果仍未回应，则会判断为网络对端主机发生了异常，强制关闭连接，并通知应用程序异常强行终止。</p>
+</blockquote>
+<ul>
+<li>连接管理</li>
+</ul>
+<p>(三次握手)</p>
+<ol>
+<li>客户端发送连接请求SYN</li>
+<li>服务端发送ACK，以及SYN允许</li>
+<li>客户端对服务端发送ACK表示成功连接</li>
+</ol>
+<p>(断开连接)</p>
+<ol>
+<li>客户端发送FIN，请求切断连接</li>
+<li>服务端发送FIN的ACK应答</li>
+<li>服务端发送FIN给客户端</li>
+<li>客户端向服务端发送ACK</li>
+</ol>
+<p>综上知，一个连接的建立和断开的正常过程至少需要7个包才能完成。</p>
+<ul>
+<li>TCP以段为单位发送数据
+在建立TCP连接的同时，也可以确定发送数据包的单位。称为MSS(Maximum Segment Size).最理想情况下，最大消息长度正好是IP中不会被分片处理的最大数据长度。</li>
+</ul>
+<p>TCP在传送大量数据时，是以MSS的大小将数据进行分割发送。进行重发时以MSS为单位。</p>
+<p>MSS是在三次握手的时候，在两端主机之间被计算得出。两端主机在发出建立连接的请求时，会在TCP首部中写入MSS选项，告诉对方的接口能够适应的MSS的大小。然后在传输数据时选择二者之间较小的一个。</p>
+<ul>
+<li>利用窗口控制提高速度。每发一个段进行一次确认应答，然后再发送下一段，这种方式的缺点是，包往返的时间越长，网络的吞吐量会越差。为解决这个问题，TCP引入窗口概念。</li>
+</ul>
+<blockquote>
+<p>确认应答不再每段返回一次，而是以更大的单位进行确认，这样转发时间将会被大幅度地缩短。
+窗口大小就是指无需等待确认应答而可以继续发送数据的最大值。该机制的实现使用了大量的缓冲区，通过多个段同时进行确认应答的功能。</p>
+</blockquote>
+<blockquote>
+<p>如果没有达到数据窗口最大值就有确认应答返回，则说明存在数据在传输中丢失的情况。这种情况将进行重发。为此，发送端主机在等到确认应答返回之前，必须在缓冲区中保留这部分数据。</p>
+</blockquote>
+<ul>
+<li>
+<p>窗口控制与重发控制。
+当数据已经被接收，但是没有收到ACK时，可以通过之后的ACK来确认数据已经收到。但是当某些数据没有被接收而导致的ACK没有接收时，会等待，如果再出现连续3次重复接收这个ACK时，会重发该段。这种机制比起超时机制可以提供更加快速的重发服务。</p>
+</li>
+<li>
+<p>流控制。 发送端控制时，应该考虑接收端的情况，这样可以避免触发重发机制。TCP提供一种机制可以发送端根据接收端的实际接收能力控制发送的数据量。具体的操作是， 接收端主机想发送端主机通知自己可以接收的数据大小，于是发送端会发送不超过这个限度的数据。该大小限制就被称为串口大小。窗口大小的值由接收端主机来决定。</p>
+</li>
+</ul>
+<blockquote>
+<p>TCP首部中，专门有这个字段来通知窗口大小。接收主机将自己可以接收的缓冲区大小放入这个字段中通知给发送端。这个字段越大，说明网络的吞吐量越高。不过当接收端这个缓冲区一旦面临数据溢出时，窗口大小的值会随之被设置为一个更小的值通知给发送端，从而控制数据发送量。这样就形成了一个完整的TCP流控制。</p>
+</blockquote>
+<p>当接收端缓冲区满，不得不停止接收数据。之后，在收到窗口更新通知后通信才得继续运行。如果窗的更新通知在传送中丢失，可能导致无法继续通信。为避免此类问题的发生，发送端主机会时不时的发送一个叫窗口探测的数据段，此数据段仅含一个字节以获取最新的窗口大小信息。</p>
+<ul>
+<li>拥塞控制</li>
+</ul>
+</div>
+<div class=article-footer>
+<blockquote class=mt-2x>
+<ul class="post-copyright list-unstyled">
+<li class="post-copyright-link hidden-xs">
+<strong>Permalink: </strong>
+<a href=https://ketop.github.io/2018/08/internet02/ title=交换机网关 target=_blank rel=external>https://ketop.github.io/2018/08/internet02/</a>
+</li>
+<li class=post-copyright-license>
+<strong>License：</strong><a href=http://creativecommons.org/licenses/by/4.0/deed.zh target=_blank rel=external>CC BY 4.0 CN</a>
+</li>
+</ul>
+</blockquote>
+<div class="panel panel-default panel-badger">
+<div class=panel-body>
+<figure class=media>
+<div class=media-left>
+<a href=https://github.com/ketop target=_blank class="img-burn thumb-sm visible-lg">
+<img src=https://ketop.github.io/avatar.png class="img-rounded w-full" alt>
+</a>
+</div>
+<div class=media-body>
+<h3 class=media-heading><a href=https://github.com/ketop target=_blank><span class=text-dark>ketop</span><small class=ml-1x>Happy work,happy life.</small></a></h3>
+<div>Keep hungry, keep foolish.</div>
+</div>
+</figure>
+</div>
+</div>
+</div>
+</article>
+<section id=comments>
+<div id=vcomments></div>
+</section>
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+<div class=bar-inner>
+<ul class="pager pull-left">
+<li class=prev>
+<a href=https://ketop.github.io/2018/08/internet01/ title=网络传输组成要素><i class="icon icon-angle-left" aria-hidden=true></i><span>&nbsp;&nbsp;Older</span></a>
+</li>
+<li class=next>
+<a href=https://ketop.github.io/2018/08/internet03/ title=IP协议><span>Newer&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden=true></i></a>
+</li>
+<li class=toggle-toc>
+<a class="toggle-btn collapsed" data-toggle=collapse href=#collapseToc aria-expanded=false title=Catalogue role=button>
+<span>[&nbsp;</span><span>Catalogue</span>
+<i class="text-collapsed icon icon-anchor"></i>
+<i class="text-in icon icon-close"></i>
+<span>]</span>
+</a>
+</li>
+</ul>
+<div class=bar-right>
+<div class=share-component data-sites=weibo,qq,wechat,facebook,twitter data-mobile-sites=weibo,qq,qzone></div>
+</div>
+</div>
+</nav>
+</main><footer class=footer itemscope itemtype=http://schema.org/WPFooter>
+<ul class=social-links>
+<li><a href=https://github.com/ketop target=_blank title=github data-toggle=tooltip data-placement=top>
+<i class="icon icon-github"></i></a></li>
+<li><a href=https://ketop.github.io/index.xml target=_blank title=rss data-toggle=tooltip data-placement=top>
+<i class="icon icon-rss"></i></a></li>
+<li><a href=http://weibo.com/duke47 target=_blank title=weibo data-toggle=tooltip data-placement=top>
+<i class="icon icon-weibo"></i></a></li>
+</ul>
+<div class=copyright>
+&copy;2017 -
+2022
+<div class=publishby>
+Theme by <a href=https://github.com/xiaoheiAh target=_blank> xiaoheiAh </a>base on<a href=https://github.com/xiaoheiAh/hugo-theme-pure target=_blank> pure</a>.
+</div>
+</div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type=text/x-mathjax-config>
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+<script async src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script>
+<script>mermaid.initialize({startOnLoad:!0})</script>
+<script>Array.from(document.getElementsByClassName('language-mermaid')).forEach(a=>{a.parentElement.outerHTML=`<div class="mermaid">${a.innerText}</div>`})</script>
+<style>.mermaid svg{display:block;margin:auto}</style>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js></script>
+<script>window.jQuery||document.write('<script src="js/jquery.min.js"><\/script>')</script>
+<script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js></script>
+<script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js defer></script>
+<script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js defer></script><script>hljs.configure({tabReplace:'    ',classPrefix:''}),hljs.initHighlightingOnLoad()</script>
+<script src=https://ketop.github.io/js/application.min.a94ab19cb63a95c8d7fbd7b85cab3ddeea8c369bdf75b9cab6708787ead123af.js></script>
+<script src=https://ketop.github.io/js/plugin.min.19c5bcb2fb0789ab4f2b7834e5ceb5e92635645605bab902c1024b25f1502364.js></script>
+<script>(function(a){var b={TRANSLATION:{POSTS:'Posts',PAGES:'Pages',CATEGORIES:'Categories',TAGS:'Tags',UNTITLED:'(Untitled)'},ROOT_URL:'https://ketop.github.io',CONTENT_URL:'https://ketop.github.io/searchindex.json '};a.INSIGHT_CONFIG=b})(window)</script>
+<script type=text/javascript src=https://ketop.github.io/js/insight.min.4a2d52de4bfff73e0c688404fe3d17c9a3ae12d9888e1e1ac9c690e4890de2ded50fe55f2b819c2ba55435a76f396f3ea6805765f0b0af5635cdf74ea459eab0.js defer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js></script>
+<script>tocbot.init({tocSelector:'.js-toc',contentSelector:'.js-toc-content',headingSelector:'h1, h2, h3',hasInnerContainers:!0})</script>
+<script src=https://cdn1.lncld.net/static/js/3.0.4/av-min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/valine></script>
+<script type=text/javascript>var GUEST=['nick','mail','link'],meta='nick,mail';meta=meta.split(',').filter(function(a){return GUEST.indexOf(a)>-1}),new Valine({el:'#vcomments',verify:null,notify:null,appId:'PckM8uefuLOV4IdD8e5jejur-gzGzoHsz',appKey:'I7jd25YaeamuXrH0Q7L1YmR1',placeholder:'useful~',avatar:'mm',meta,pageSize:'10'||10,visitor:!1})</script>
+</body>
+</html>

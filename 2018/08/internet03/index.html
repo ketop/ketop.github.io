@@ -1,0 +1,509 @@
+<!doctype html><html lang=en>
+<head>
+<title>
+IP协议 - Ketop's Realm
+</title>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+<meta name=renderer content="webkit">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="black">
+<meta name=format-detection content="telephone=no,email=no,adress=no">
+<meta name=theme-color content="#000000">
+<meta http-equiv=window-target content="_top">
+<meta name=description content="TCP/IP的心脏是互联网层。该层主要由IP协议与ICMP(Internet Control Message Protocol)两个协议组成。 IP协议 IP相当与OSI模型">
+<meta name=generator content="Hugo 0.91.2 with theme pure">
+<title>IP协议 - Ketop's Realm</title>
+<link rel=stylesheet href=https://ketop.github.io/css/style.min.c58e22f1aa6179cd5cb60b9e08421a2b9a9c9fe9352d095e051b51aae209e5c0.css>
+<link rel=stylesheet href=https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css async>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css async>
+<meta property="og:title" content="IP协议">
+<meta property="og:description" content="TCP/IP的心脏是互联网层。该层主要由IP协议与ICMP(Internet Control Message Protocol)两个协议组成。 IP协议 IP相当与OSI模型">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ketop.github.io/2018/08/internet03/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2018-08-16T19:49:14+08:00">
+<meta property="article:modified_time" content="2018-08-16T19:49:14+08:00">
+<meta itemprop=name content="IP协议">
+<meta itemprop=description content="TCP/IP的心脏是互联网层。该层主要由IP协议与ICMP(Internet Control Message Protocol)两个协议组成。 IP协议 IP相当与OSI模型"><meta itemprop=datePublished content="2018-08-16T19:49:14+08:00">
+<meta itemprop=dateModified content="2018-08-16T19:49:14+08:00">
+<meta itemprop=wordCount content="4051">
+<meta itemprop=keywords content="tcp/ip,网络,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="IP协议">
+<meta name=twitter:description content="TCP/IP的心脏是互联网层。该层主要由IP协议与ICMP(Internet Control Message Protocol)两个协议组成。 IP协议 IP相当与OSI模型"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body class="main-center theme-black" itemscope itemtype=http://schema.org/WebPage><header class=header itemscope itemtype=http://schema.org/WPHeader>
+<div class=slimContent>
+<div class=navbar-header>
+<div class="profile-block text-center">
+<a id=avatar href=https://github.com/ketop target=_blank>
+<img class="img-circle img-rotate" src=https://ketop.github.io/avatar.png width=200 height=200>
+</a>
+<h2 id=name class="hidden-xs hidden-sm">ketop</h2>
+<h3 id=title class="hidden-xs hidden-sm hidden-md">Happy work,happy life.</h3>
+<small id=location class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Nanjing, China</small>
+</div><div class=search id=search-form-wrap>
+<form class="search-form sidebar-form">
+<div class=input-group>
+<input type=text class="search-form-input form-control" placeholder=Search>
+<span class=input-group-btn>
+<button type=submit class="search-form-submit btn btn-flat" onclick=return!1><i class="icon icon-search"></i></button>
+</span>
+</div>
+<div class=ins-search>
+<div class=ins-search-mask></div>
+<div class=ins-search-container>
+<div class=ins-input-wrapper>
+<input type=text class=ins-search-input placeholder="Type something..." x-webkit-speech>
+<button type=button class="close ins-close ins-selectable" data-dismiss=modal aria-label=Close><span aria-hidden=true>×</span></button>
+</div>
+<div class=ins-section-wrapper>
+<div class=ins-section-container></div>
+</div>
+</div>
+</div>
+</form>
+</div>
+<button class="navbar-toggle collapsed" type=button data-toggle=collapse data-target=#main-navbar aria-controls=main-navbar aria-expanded=false>
+<span class=sr-only>Toggle navigation</span>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+</button>
+</div>
+<nav id=main-navbar class="collapse navbar-collapse" itemscope itemtype=http://schema.org/SiteNavigationElement role=navigation>
+<ul class="nav navbar-nav main-nav">
+<li class="menu-item menu-item-home">
+<a href=/>
+<i class="icon icon-home-fill"></i>
+<span class=menu-title>Home</span>
+</a>
+</li>
+<li class="menu-item menu-item-archives">
+<a href=/posts/>
+<i class="icon icon-archives-fill"></i>
+<span class=menu-title>Archives</span>
+</a>
+</li>
+<li class="menu-item menu-item-categories">
+<a href=/categories/>
+<i class="icon icon-folder"></i>
+<span class=menu-title>Categories</span>
+</a>
+</li>
+<li class="menu-item menu-item-tags">
+<a href=/tags/>
+<i class="icon icon-tags"></i>
+<span class=menu-title>Tags</span>
+</a>
+</li>
+<li class="menu-item menu-item-about">
+<a href=/about/>
+<i class="icon icon-cup-fill"></i>
+<span class=menu-title>About</span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</header>
+<aside class=sidebar itemscope itemtype=http://schema.org/WPSideBar>
+<div class=slimContent>
+<div class=widget>
+<h3 class=widget-title>Board</h3>
+<div class=widget-body>
+<div id=board>
+<div class=content><p>enjoy~</p>
+</div>
+</div>
+</div>
+</div>
+<div class=widget>
+<h3 class=widget-title> Categories</h3>
+<div class=widget-body>
+<ul class=category-list>
+</ul>
+</div>
+</div>
+<div class=widget>
+<h3 class=widget-title> Tags</h3>
+<div class=widget-body>
+<ul class=tag-list>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/c/c++/ class=tag-list-link>c/c++</a><span class=tag-list-count>5</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/github/ class=tag-list-link>github</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/hugo/ class=tag-list-link>hugo</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/psqlodbc/ class=tag-list-link>psqlodbc</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/sqlbindparameter/ class=tag-list-link>sqlbindparameter</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/tcp/ip/ class=tag-list-link>tcp/ip</a><span class=tag-list-count>3</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/travis-ci/ class=tag-list-link>travis-ci</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/ubuntu/ class=tag-list-link>ubuntu</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/unixodbc/ class=tag-list-link>unixodbc</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/wsl/ class=tag-list-link>wsl</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/%E7%BD%91%E7%BB%9C/ class=tag-list-link>网络</a><span class=tag-list-count>3</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/ class=tag-list-link>设计模式</a><span class=tag-list-count>1</span></li>
+</ul>
+</div>
+</div>
+<div class=widget>
+<h3 class=widget-title>Recent Posts</h3>
+<div class=widget-body>
+<ul class="recent-post-list list-unstyled no-thumbnail">
+<li>
+<div class=item-inner>
+<p class=item-title>
+<a href=https://ketop.github.io/2022/08/psqlodbc/ class=title>UTF8字符解析错误PG执行失败</a>
+</p>
+<p class=item-date>
+<time datetime="2022-08-17 20:25:01 +0800 +0800" itemprop=datePublished>2022-08-17</time>
+</p>
+</div>
+</li>
+<li>
+<div class=item-inner>
+<p class=item-title>
+<a href=https://ketop.github.io/2021/04/singleton/ class=title>设计模式-单例模式</a>
+</p>
+<p class=item-date>
+<time datetime="2021-04-26 00:04:47 +0800 +0800" itemprop=datePublished>2021-04-26</time>
+</p>
+</div>
+</li>
+<li>
+<div class=item-inner>
+<p class=item-title>
+<a href=https://ketop.github.io/2021/01/wsl/ class=title>win10 wsl</a>
+</p>
+<p class=item-date>
+<time datetime="2021-01-20 21:45:13 +0000 UTC" itemprop=datePublished>2021-01-20</time>
+</p>
+</div>
+</li>
+<li>
+<div class=item-inner>
+<p class=item-title>
+<a href=https://ketop.github.io/2020/12/callable/ class=title>C++可调用对象</a>
+</p>
+<p class=item-date>
+<time datetime="2020-12-07 22:30:07 +0800 +0800" itemprop=datePublished>2020-12-07</time>
+</p>
+</div>
+</li>
+<li>
+<div class=item-inner>
+<p class=item-title>
+<a href=https://ketop.github.io/2020/09/2020-09-17-travis-ci/ class=title>使用travis ci自动化发布hugo博客</a>
+</p>
+<p class=item-date>
+<time datetime="2020-09-18 20:20:18 +0800 +0800" itemprop=datePublished>2020-09-18</time>
+</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</aside>
+<aside class="sidebar sidebar-toc collapse" id=collapseToc itemscope itemtype=http://schema.org/WPSideBar>
+<div class=slimContent>
+<h4 class=toc-title>Catalogue</h4>
+<nav id=toc class="js-toc toc">
+</nav>
+</div>
+</aside>
+<main class=main role=main><div class=content>
+<article id=- class="article article-type-" itemscope itemtype=http://schema.org/BlogPosting>
+<div class=article-header>
+<h1 itemprop=name>
+<a class=article-title href=/2018/08/internet03/>IP协议</a>
+</h1>
+<div class=article-meta>
+<span class=article-date>
+<i class="icon icon-calendar-check"></i>&nbsp;
+<a href=https://ketop.github.io/2018/08/internet03/ class=article-date>
+<time datetime="2018-08-16 19:49:14 +0800 +0800" itemprop=datePublished>2018-08-16</time>
+</a>
+</span>
+<span class=article-tag>
+<i class="icon icon-tags"></i>&nbsp;
+<a class=article-tag-link href=/tags/tcp/ip/> tcp/ip </a>
+<a class=article-tag-link href=/tags/%E7%BD%91%E7%BB%9C/> 网络 </a>
+</span>
+<span class=post-comment><i class="icon icon-comment"></i>&nbsp;<a href=/2018/08/internet03/#comments class=article-comment-link>Comments</a></span>
+<span class="post-wordcount hidden-xs" itemprop=wordCount>Word Count: 4051words</span>
+<span class="post-readcount hidden-xs" itemprop=timeRequired>Read Count: 9minutes </span>
+</div>
+</div>
+<div class="article-entry marked-body js-toc-content" itemprop=articleBody>
+<p>TCP/IP的心脏是互联网层。该层主要由IP协议与ICMP(Internet Control Message Protocol)两个协议组成。</p>
+<h1 id=ip协议>IP协议</h1>
+<p>IP相当与OSI模型中的第3层网络层。网络层的主要作用是“实现终端节点之间的通信”。数据链路层的主要作用是在互连的同一种数据链路的节点之间进行包传递。而一旦跨越多种数据链路，就需要借助网络层。网络层可以跨越不同的数据链路，即使是在不同的数据链路上也能实现两端点之间的数据包传输。</p>
+<h2 id=ip基础知识>IP基础知识</h2>
+<ul>
+<li>
+<p>数据链路有MAC地址，网络层使用IP地址。IP地址用于在“连接到网络中的所有主机中识别出进行通信的目标地址”。因此在TCP/IP通信中所有的主机或者路由器必须设定自己的IP地址。IP地址与数据链路没有关系，任何数据链路形式的改变都不会影响IP地址的形式。在网桥、交换集线器等物理层与数据链路层数据包转发设备中，不需要设置IP地址。</p>
+</li>
+<li>
+<p>路由控制 将分组数据发送到最终目标地址的功能。即使网络非常复杂，也可以通过路由控制u确定到达目标地址的通路。路由控制如果出现异常，分组数据极有可能“迷失”。因此，一个数据包之所以能成功到达最终的目标地址，全靠路由控制。</p>
+</li>
+</ul>
+<blockquote>
+<p>Hop译为“跳”。它是指网络中的一个区间。该区间指利用数据链路层一下分层的功能传输数据帧的一个区间。这个区间是主机或者路由器网卡不经过其他路由器而能直接到达的相邻的主机或路由器网卡之间的一个区间。在这一跳中，可以有网桥或者交换集线器相连，但不会通过路由器或网关相连。</p>
+</blockquote>
+<ul>
+<li>
+<p>路由控制表 为了将数据包发给目标主机，所有的主机都维护这一张路由控制表。该表记录IP数据在下一步应该发个哪个路由器。IP包将根据这个路由表在各个数据链路上传输。</p>
+</li>
+<li>
+<p>数据链路的抽象化 对不同数据链路的相异特征进行抽象化也是IP的重要作用之一。不同的数据链路有个最大的区别，就是它们各自的最大传输单位(MTU: Maximum Transmission Unit)不同。MTU在以太网中为1500Bytes，FDDI为4352Bytes，ATM则为9180Bytes。IP的上一层可能会要求传送比这些MTU更多的字节，因此必须在线路上传送比包长还小的MTU。</p>
+</li>
+</ul>
+<blockquote>
+<p>为了解决这个问题，IP进行分片处理。将较大的IP包分为多个较小的IP包。分片的包到了对端目标地址以后会再被组合起来传送给上一层。从上一层来看，它完全忽略这个分包过程。IP使用这种方式抽象了数据链路层。</p>
+</blockquote>
+<ul>
+<li>IP属于面向无连接型
+是否面向连接交给上层协议来决定，IP采用面向无连接的方式。一是为了简化，二是为了提速。</li>
+</ul>
+<h2 id=ip地址的定义>IP地址的定义</h2>
+<pre><code>192.168.1.119
+---.---.---.---
+(网络标识)(主机标识)
+</code></pre>
+<p>网络标识在数据链路的每个段配置不同的值。网络标识必须保证相互连接的每个段的地址不重复。而相同段内的主机必须有相同的网络地址，但主机标识不能重复。</p>
+<p>IP包被转发到途中某个路由器时，是利用IP地址的网络标识进行路由。因为即使看不到主机标识，只要一见到网络标识就能判断出是否为该段内主机。</p>
+<p>到底前几位为网络标识，现在基本以子网掩码(网络前缀)区分。以前是通过分类来区分的(A/B/C/D).</p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A类</td>
+<td>首位为“0”，第1位到第8位为网络标识，后24位相当于主机标识</td>
+</tr>
+<tr>
+<td>B类</td>
+<td>以“10”开头，第1到第16位为网络标识</td>
+</tr>
+<tr>
+<td>C类</td>
+<td>以“110”开头，第1位到第24位为网络标识</td>
+</tr>
+<tr>
+<td>D类</td>
+<td>以“1110”开头，从第1位到32位为网络标识</td>
+</tr>
+</tbody>
+</table>
+<p><em>广播地址</em>
+用于在同一个链路中相互连接的主机之间发送数据包。将IP地址中的<em>主机地址</em>部分全部设置为1，就成为了广播地址。</p>
+<blockquote>
+<ul>
+<li>本地广播
+仅在本网络内进行广播，由于该广播地址的IP包会被路由器屏蔽，所以不会到达本网络之外的其他链路。</li>
+<li>直接广播 在不同的网络之间的广播。收到这个包的路由器将数据转发到其他网络段。这种广播有一定的安全问题。多数情况下会在路由器上设置为不转发。</li>
+</ul>
+</blockquote>
+<p><em>多播地址</em>用于将包发送给特定组内的所有主机。由于其直接使用IP协议，因此不是可靠传输。在多媒体应用中使用广泛，具体实现上往往采用复制1对1通信的数据，将其同时发送给多个主机的方式。多播即可以穿透路由器，也可以实现只给那些必要的组发送数据包。</p>
+<blockquote>
+<p>多播地址使用D类地址，如果首位开始到第4位为“1110”，就可以认为是多播地址。而剩下的28位可以成为多播的组编号。从224.0.0.0到239.255.255.255都是多播地址的可用范围。其中从224.0,0.0到224.0.0.255的范围不需要路由器控制，在同一个链路内也能实现多播。而在这个范围之外设置多播地址会给全网所有组内成员发送多播的包。</p>
+</blockquote>
+<blockquote>
+<p>此外，对于多播，所有的主机(路由器以外的主机和终端主机)必须属于224.0.0.1的组，所有的路由器必须属于224.0.0.2的组。</p>
+</blockquote>
+<p><em>子网掩码</em></p>
+<p>对应于网络标识的位全为1,主机标识全为0.</p>
+<p>另外一种表示方法是在IP地址后追加网络地址的位数，用“/”隔开。这种方式可以省略IP地址后面的0,例如172.20.0.0/16跟172.20/16其实是一个意思。</p>
+<h2 id=ip协议相关技术>IP协议相关技术</h2>
+<p>IP协议继续要为上层服务，也需要下层数据链路层的支持。在实际中，仅凭IP远远不够，还需要众多支持IP的相关技术。</p>
+<ul>
+<li>DNS</li>
+</ul>
+<blockquote>
+<p>IP地址由一串数字序列组成，并不好记。为此TCP/IP世界中有了主机识别码的东西。系统会自动进行主机名转换为具体IP的过程。然而，随着网络规模的扩大，需要有效管理这些对应关系。因此就有了DNS(Domain Name System)。</p>
+</blockquote>
+<blockquote>
+<p>域名由几个英文字母用点号连接构成。DNS采用分层管理，看起来像一棵倒挂的树，称为树形结构。</p>
+</blockquote>
+<blockquote>
+<p>域名服务器是指管理域名的主机和相应的软件，它可以管理所在分层的域的相关信息。所管理的分层叫做ZONE。每层都设有一个域名服务器。各层域名服务器都了解该层以下分层中所有的域名服务器的IP地址。因此它们从根域名服务器开始呈树状结构相互连接。 由于所有域名服务器都了解根域名服务器的IP地址，所以若从根开始按追踪，可以访问世界上所有域名服务器的地址。下层的变更需要在上层进行相应的修改变更。</p>
+</blockquote>
+<blockquote>
+<p>进行DNS查询的主机和软件叫做DNS解析器。一个解析器至少要注册一个以上域名服务器的IP地址。通常，它至少包括组织内部的域名服务器的IP地址。</p>
+</blockquote>
+<ul>
+<li>ARP</li>
+</ul>
+<blockquote>
+<p>在确定IP地址之后，实际通信还需要MAC地址。ARP(Address Resolution Protocol)是一种解决问题的协议。以目标IP为线索，用来定位下一个应该接收数据分包的网络设备对应的MAC地址。如果目标主机不在同一个链路上，可以通过ARP查找下一跳路由器的MAC地址。</p>
+</blockquote>
+<blockquote>
+<p>首先在同链路内广播ARP请求包，该请求包将被同一个链路上的所有的主机或路由器接收，因此ARP请求包也就会被这同一个链路中的所有主机和路由器进行解析。如果本链路内找到目标主机，则该节点会将自己的MAC地址塞入ARP响应包返回给主机A。在不同链路中传输，会现将请求包发送给链路内的路由器，此时响应包中的MAC地址为该路由器的MAC地址。</p>
+</blockquote>
+<ul>
+<li>ICMP</li>
+</ul>
+<blockquote>
+<p>ICMP的主要功能包括，确认IP包是否成功送达目标地址，通知在发送过程中IP包被废弃的具体原因，改善网络设置等。
+ICMP的这种通知消息会使用IP进行发送。ICMP的消息大致可以分为两类:一类是通知出错原因的错误消息，另一类是用于诊断的查询信息。</p>
+</blockquote>
+<ul>
+<li>DHCP</li>
+</ul>
+<blockquote>
+<p>一般电脑入网前，需要手动设置IP地址、子网掩码、默认路由及DNS服务器等。为了实现自动设置IP地址、统一管理IP地址分配，就产生了DHCP(Dynamic Host Configuration Protocol)协议。有了DHCP，计算机只要连接到网络，就可以进行TCP/IP通信。DHCP额昂即插即用变为可能。</p>
+</blockquote>
+<blockquote>
+<p>DHCP在工作时，首先客户端向链路内广播DHCP发现包，发现包的目标地址为广播地址255.255.255.255，而源地址则为0.0.0.0。然后DHCP给客户端发送DHCP提供包，通知可以使用的网络设置。DHCP客户端再次发送DHCP请求包，表示想使用DHCP服务器响应包中的设置。最后DHCP服务器返回DHCP提供包，通知客户端被允许使用该设置。</p>
+</blockquote>
+<ul>
+<li>NAT(Network Address Translator)</li>
+</ul>
+<blockquote>
+<p>用于在本地网络中使用私有地址，在链接互联网时转而使用全局IP地址的技术。除转换IP地址外，还出现了可以转换TCP、UDP端口号的NAPT(Network Address Ports Translator)技术，由此可以实现用一个全局IP地址与多个主机的通信。 通常所说的NAT指的就是NAPT。</p>
+</blockquote>
+<blockquote>
+<p>NAT路由器将内网IP包的IP首部进行转换，转换为全局IP首部进行转发。当有包从互联网传入时，也需要进行IP首部替换，改变为私有IP地址，然后再进行转发。在NAT(NAPT)路由器内部，会自动生成一张用来转换的表，然后按表中的映射关系进行处理。</p>
+</blockquote>
+<blockquote>
+<p>NAT仅仅转换IP地址，实际上只能同时有一台主机能完成通信。NAPT是将IP和端口号一起转换，将不同的内网IP转换为相同主机不同端口，从而实现与互联网的通信。</p>
+</blockquote>
+<blockquote>
+<p>NAT(NAPT)都依赖于自己的转换表。但转换表只在内网向外网发包时才创建映射，因此无法从NAT外部向内部发起连接。 转换表的生成和转换需要一定的开销。通信过程中一旦NAT异常需要重新启动，所有的TCP连接将被重置。即使有两台NAT做容灾备份，TCP连接还是会断开。</p>
+</blockquote>
+<ul>
+<li>IP隧道</li>
+</ul>
+<blockquote>
+<p>如果网络A、B使用IPv6,而中间位置的网络C使用的IPv4的话，网络A与网络B将无法直接进行通信。为了让它们之间正常的通信，必须采用IP隧道的知识。</p>
+</blockquote>
+<blockquote>
+<p>IP隧道中将那些从网络A发送过来的IPv6的包统一为一个数据，在为之加上IPv4的首部以后转发给网络C。一般的情况下，IP首部之后是TCP或UDP的首部，现在紧接着还是IP首部，这种情况与日俱增，被称为"IP隧道"。
+例如，现在很多路由器上没有多播包的路由控制信息，多播消息也就无法穿越路由器发送的消息，那么在这类环境中，可以使用IP隧道，就可以使路由器用单播的形式发包，也就能够想距离较远的链路转发多播消息。
+实际的应用还有</p>
+<ol>
+<li>Mobile IP</li>
+<li>多播包的转播</li>
+<li>IPv4网络中传送IPv6的包</li>
+<li>IPv6网络中传送IPv4的包</li>
+<li>数据链路帧通过IP包发送(L2TP)</li>
+</ol>
+</blockquote>
+<ul>
+<li>IP多播相关技术
+<ul>
+<li>IP任播</li>
+<li>通信质量控制
+-显式阻塞通知</li>
+<li>Mobile IP</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class=article-footer>
+<blockquote class=mt-2x>
+<ul class="post-copyright list-unstyled">
+<li class="post-copyright-link hidden-xs">
+<strong>Permalink: </strong>
+<a href=https://ketop.github.io/2018/08/internet03/ title=IP协议 target=_blank rel=external>https://ketop.github.io/2018/08/internet03/</a>
+</li>
+<li class=post-copyright-license>
+<strong>License：</strong><a href=http://creativecommons.org/licenses/by/4.0/deed.zh target=_blank rel=external>CC BY 4.0 CN</a>
+</li>
+</ul>
+</blockquote>
+<div class="panel panel-default panel-badger">
+<div class=panel-body>
+<figure class=media>
+<div class=media-left>
+<a href=https://github.com/ketop target=_blank class="img-burn thumb-sm visible-lg">
+<img src=https://ketop.github.io/avatar.png class="img-rounded w-full" alt>
+</a>
+</div>
+<div class=media-body>
+<h3 class=media-heading><a href=https://github.com/ketop target=_blank><span class=text-dark>ketop</span><small class=ml-1x>Happy work,happy life.</small></a></h3>
+<div>Keep hungry, keep foolish.</div>
+</div>
+</figure>
+</div>
+</div>
+</div>
+</article>
+<section id=comments>
+<div id=vcomments></div>
+</section>
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+<div class=bar-inner>
+<ul class="pager pull-left">
+<li class=prev>
+<a href=https://ketop.github.io/2018/08/internet02/ title=交换机网关><i class="icon icon-angle-left" aria-hidden=true></i><span>&nbsp;&nbsp;Older</span></a>
+</li>
+<li class=next>
+<a href=https://ketop.github.io/2018/08/2020-04-05-c-%E8%AF%AD%E6%B3%95/ title=C++移动构造函数><span>Newer&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden=true></i></a>
+</li>
+<li class=toggle-toc>
+<a class="toggle-btn collapsed" data-toggle=collapse href=#collapseToc aria-expanded=false title=Catalogue role=button>
+<span>[&nbsp;</span><span>Catalogue</span>
+<i class="text-collapsed icon icon-anchor"></i>
+<i class="text-in icon icon-close"></i>
+<span>]</span>
+</a>
+</li>
+</ul>
+<div class=bar-right>
+<div class=share-component data-sites=weibo,qq,wechat,facebook,twitter data-mobile-sites=weibo,qq,qzone></div>
+</div>
+</div>
+</nav>
+</main><footer class=footer itemscope itemtype=http://schema.org/WPFooter>
+<ul class=social-links>
+<li><a href=https://github.com/ketop target=_blank title=github data-toggle=tooltip data-placement=top>
+<i class="icon icon-github"></i></a></li>
+<li><a href=https://ketop.github.io/index.xml target=_blank title=rss data-toggle=tooltip data-placement=top>
+<i class="icon icon-rss"></i></a></li>
+<li><a href=http://weibo.com/duke47 target=_blank title=weibo data-toggle=tooltip data-placement=top>
+<i class="icon icon-weibo"></i></a></li>
+</ul>
+<div class=copyright>
+&copy;2017 -
+2022
+<div class=publishby>
+Theme by <a href=https://github.com/xiaoheiAh target=_blank> xiaoheiAh </a>base on<a href=https://github.com/xiaoheiAh/hugo-theme-pure target=_blank> pure</a>.
+</div>
+</div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type=text/x-mathjax-config>
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+<script async src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script>
+<script>mermaid.initialize({startOnLoad:!0})</script>
+<script>Array.from(document.getElementsByClassName('language-mermaid')).forEach(a=>{a.parentElement.outerHTML=`<div class="mermaid">${a.innerText}</div>`})</script>
+<style>.mermaid svg{display:block;margin:auto}</style>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js></script>
+<script>window.jQuery||document.write('<script src="js/jquery.min.js"><\/script>')</script>
+<script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js></script>
+<script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js defer></script>
+<script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js defer></script><script>hljs.configure({tabReplace:'    ',classPrefix:''}),hljs.initHighlightingOnLoad()</script>
+<script src=https://ketop.github.io/js/application.min.a94ab19cb63a95c8d7fbd7b85cab3ddeea8c369bdf75b9cab6708787ead123af.js></script>
+<script src=https://ketop.github.io/js/plugin.min.19c5bcb2fb0789ab4f2b7834e5ceb5e92635645605bab902c1024b25f1502364.js></script>
+<script>(function(a){var b={TRANSLATION:{POSTS:'Posts',PAGES:'Pages',CATEGORIES:'Categories',TAGS:'Tags',UNTITLED:'(Untitled)'},ROOT_URL:'https://ketop.github.io',CONTENT_URL:'https://ketop.github.io/searchindex.json '};a.INSIGHT_CONFIG=b})(window)</script>
+<script type=text/javascript src=https://ketop.github.io/js/insight.min.4a2d52de4bfff73e0c688404fe3d17c9a3ae12d9888e1e1ac9c690e4890de2ded50fe55f2b819c2ba55435a76f396f3ea6805765f0b0af5635cdf74ea459eab0.js defer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js></script>
+<script>tocbot.init({tocSelector:'.js-toc',contentSelector:'.js-toc-content',headingSelector:'h1, h2, h3',hasInnerContainers:!0})</script>
+<script src=https://cdn1.lncld.net/static/js/3.0.4/av-min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/valine></script>
+<script type=text/javascript>var GUEST=['nick','mail','link'],meta='nick,mail';meta=meta.split(',').filter(function(a){return GUEST.indexOf(a)>-1}),new Valine({el:'#vcomments',verify:null,notify:null,appId:'PckM8uefuLOV4IdD8e5jejur-gzGzoHsz',appKey:'I7jd25YaeamuXrH0Q7L1YmR1',placeholder:'useful~',avatar:'mm',meta,pageSize:'10'||10,visitor:!1})</script>
+</body>
+</html>

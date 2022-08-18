@@ -1,0 +1,426 @@
+<!doctype html><html lang=en>
+<head>
+<title>
+C++可调用对象 - Ketop's Realm
+</title>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+<meta name=renderer content="webkit">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="black">
+<meta name=format-detection content="telephone=no,email=no,adress=no">
+<meta name=theme-color content="#000000">
+<meta http-equiv=window-target content="_top">
+<meta name=description content="c++11之前的可调用对象有：函数，函数指针，以及重载operator()运算符的对象。C++11之后，新增了可调用对象lambda表达式和">
+<meta name=generator content="Hugo 0.91.2 with theme pure">
+<title>C++可调用对象 - Ketop's Realm</title>
+<link rel=stylesheet href=https://ketop.github.io/css/style.min.c58e22f1aa6179cd5cb60b9e08421a2b9a9c9fe9352d095e051b51aae209e5c0.css>
+<link rel=stylesheet href=https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css async>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css async>
+<meta property="og:title" content="C++可调用对象">
+<meta property="og:description" content="c++11之前的可调用对象有：函数，函数指针，以及重载operator()运算符的对象。C++11之后，新增了可调用对象lambda表达式和">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ketop.github.io/2020/12/callable/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2020-12-07T22:30:07+08:00">
+<meta property="article:modified_time" content="2020-12-07T22:30:07+08:00">
+<meta itemprop=name content="C++可调用对象">
+<meta itemprop=description content="c++11之前的可调用对象有：函数，函数指针，以及重载operator()运算符的对象。C++11之后，新增了可调用对象lambda表达式和"><meta itemprop=datePublished content="2020-12-07T22:30:07+08:00">
+<meta itemprop=dateModified content="2020-12-07T22:30:07+08:00">
+<meta itemprop=wordCount content="818">
+<meta itemprop=keywords content="c/c++,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="C++可调用对象">
+<meta name=twitter:description content="c++11之前的可调用对象有：函数，函数指针，以及重载operator()运算符的对象。C++11之后，新增了可调用对象lambda表达式和"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body class="main-center theme-black" itemscope itemtype=http://schema.org/WebPage><header class=header itemscope itemtype=http://schema.org/WPHeader>
+<div class=slimContent>
+<div class=navbar-header>
+<div class="profile-block text-center">
+<a id=avatar href=https://github.com/ketop target=_blank>
+<img class="img-circle img-rotate" src=https://ketop.github.io/avatar.png width=200 height=200>
+</a>
+<h2 id=name class="hidden-xs hidden-sm">ketop</h2>
+<h3 id=title class="hidden-xs hidden-sm hidden-md">Happy work,happy life.</h3>
+<small id=location class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Nanjing, China</small>
+</div><div class=search id=search-form-wrap>
+<form class="search-form sidebar-form">
+<div class=input-group>
+<input type=text class="search-form-input form-control" placeholder=Search>
+<span class=input-group-btn>
+<button type=submit class="search-form-submit btn btn-flat" onclick=return!1><i class="icon icon-search"></i></button>
+</span>
+</div>
+<div class=ins-search>
+<div class=ins-search-mask></div>
+<div class=ins-search-container>
+<div class=ins-input-wrapper>
+<input type=text class=ins-search-input placeholder="Type something..." x-webkit-speech>
+<button type=button class="close ins-close ins-selectable" data-dismiss=modal aria-label=Close><span aria-hidden=true>×</span></button>
+</div>
+<div class=ins-section-wrapper>
+<div class=ins-section-container></div>
+</div>
+</div>
+</div>
+</form>
+</div>
+<button class="navbar-toggle collapsed" type=button data-toggle=collapse data-target=#main-navbar aria-controls=main-navbar aria-expanded=false>
+<span class=sr-only>Toggle navigation</span>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+</button>
+</div>
+<nav id=main-navbar class="collapse navbar-collapse" itemscope itemtype=http://schema.org/SiteNavigationElement role=navigation>
+<ul class="nav navbar-nav main-nav">
+<li class="menu-item menu-item-home">
+<a href=/>
+<i class="icon icon-home-fill"></i>
+<span class=menu-title>Home</span>
+</a>
+</li>
+<li class="menu-item menu-item-archives">
+<a href=/posts/>
+<i class="icon icon-archives-fill"></i>
+<span class=menu-title>Archives</span>
+</a>
+</li>
+<li class="menu-item menu-item-categories">
+<a href=/categories/>
+<i class="icon icon-folder"></i>
+<span class=menu-title>Categories</span>
+</a>
+</li>
+<li class="menu-item menu-item-tags">
+<a href=/tags/>
+<i class="icon icon-tags"></i>
+<span class=menu-title>Tags</span>
+</a>
+</li>
+<li class="menu-item menu-item-about">
+<a href=/about/>
+<i class="icon icon-cup-fill"></i>
+<span class=menu-title>About</span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</header>
+<aside class=sidebar itemscope itemtype=http://schema.org/WPSideBar>
+<div class=slimContent>
+<div class=widget>
+<h3 class=widget-title>Board</h3>
+<div class=widget-body>
+<div id=board>
+<div class=content><p>enjoy~</p>
+</div>
+</div>
+</div>
+</div>
+<div class=widget>
+<h3 class=widget-title> Categories</h3>
+<div class=widget-body>
+<ul class=category-list>
+</ul>
+</div>
+</div>
+<div class=widget>
+<h3 class=widget-title> Tags</h3>
+<div class=widget-body>
+<ul class=tag-list>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/c/c++/ class=tag-list-link>c/c++</a><span class=tag-list-count>5</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/github/ class=tag-list-link>github</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/hugo/ class=tag-list-link>hugo</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/psqlodbc/ class=tag-list-link>psqlodbc</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/sqlbindparameter/ class=tag-list-link>sqlbindparameter</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/tcp/ip/ class=tag-list-link>tcp/ip</a><span class=tag-list-count>3</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/travis-ci/ class=tag-list-link>travis-ci</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/ubuntu/ class=tag-list-link>ubuntu</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/unixodbc/ class=tag-list-link>unixodbc</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/wsl/ class=tag-list-link>wsl</a><span class=tag-list-count>1</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/%E7%BD%91%E7%BB%9C/ class=tag-list-link>网络</a><span class=tag-list-count>3</span></li>
+<li class=tag-list-item><a href=https://ketop.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/ class=tag-list-link>设计模式</a><span class=tag-list-count>1</span></li>
+</ul>
+</div>
+</div>
+<div class=widget>
+<h3 class=widget-title>Recent Posts</h3>
+<div class=widget-body>
+<ul class="recent-post-list list-unstyled no-thumbnail">
+<li>
+<div class=item-inner>
+<p class=item-title>
+<a href=https://ketop.github.io/2022/08/psqlodbc/ class=title>UTF8字符解析错误PG执行失败</a>
+</p>
+<p class=item-date>
+<time datetime="2022-08-17 20:25:01 +0800 +0800" itemprop=datePublished>2022-08-17</time>
+</p>
+</div>
+</li>
+<li>
+<div class=item-inner>
+<p class=item-title>
+<a href=https://ketop.github.io/2021/04/singleton/ class=title>设计模式-单例模式</a>
+</p>
+<p class=item-date>
+<time datetime="2021-04-26 00:04:47 +0800 +0800" itemprop=datePublished>2021-04-26</time>
+</p>
+</div>
+</li>
+<li>
+<div class=item-inner>
+<p class=item-title>
+<a href=https://ketop.github.io/2021/01/wsl/ class=title>win10 wsl</a>
+</p>
+<p class=item-date>
+<time datetime="2021-01-20 21:45:13 +0000 UTC" itemprop=datePublished>2021-01-20</time>
+</p>
+</div>
+</li>
+<li>
+<div class=item-inner>
+<p class=item-title>
+<a href=https://ketop.github.io/2020/12/callable/ class=title>C++可调用对象</a>
+</p>
+<p class=item-date>
+<time datetime="2020-12-07 22:30:07 +0800 +0800" itemprop=datePublished>2020-12-07</time>
+</p>
+</div>
+</li>
+<li>
+<div class=item-inner>
+<p class=item-title>
+<a href=https://ketop.github.io/2020/09/2020-09-17-travis-ci/ class=title>使用travis ci自动化发布hugo博客</a>
+</p>
+<p class=item-date>
+<time datetime="2020-09-18 20:20:18 +0800 +0800" itemprop=datePublished>2020-09-18</time>
+</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</aside>
+<aside class="sidebar sidebar-toc collapse" id=collapseToc itemscope itemtype=http://schema.org/WPSideBar>
+<div class=slimContent>
+<h4 class=toc-title>Catalogue</h4>
+<nav id=toc class="js-toc toc">
+</nav>
+</div>
+</aside>
+<main class=main role=main><div class=content>
+<article id=- class="article article-type-" itemscope itemtype=http://schema.org/BlogPosting>
+<div class=article-header>
+<h1 itemprop=name>
+<a class=article-title href=/2020/12/callable/>C++可调用对象</a>
+</h1>
+<div class=article-meta>
+<span class=article-date>
+<i class="icon icon-calendar-check"></i>&nbsp;
+<a href=https://ketop.github.io/2020/12/callable/ class=article-date>
+<time datetime="2020-12-07 22:30:07 +0800 +0800" itemprop=datePublished>2020-12-07</time>
+</a>
+</span>
+<span class=article-tag>
+<i class="icon icon-tags"></i>&nbsp;
+<a class=article-tag-link href=/tags/c/c++/> c/c++ </a>
+</span>
+<span class=post-comment><i class="icon icon-comment"></i>&nbsp;<a href=/2020/12/callable/#comments class=article-comment-link>Comments</a></span>
+<span class="post-wordcount hidden-xs" itemprop=wordCount>Word Count: 818words</span>
+<span class="post-readcount hidden-xs" itemprop=timeRequired>Read Count: 2minutes </span>
+</div>
+</div>
+<div class="article-entry marked-body js-toc-content" itemprop=articleBody>
+<p>c++11之前的可调用对象有：函数，函数指针，以及重载operator()运算符的对象。C++11之后，新增了可调用对象lambda表达式和bind函数的返回值，同时引入了新的类型function，用来<strong>统一</strong>可调用对象。声明方式如下</p>
+<pre><code class=language-cpp>function&lt;T&gt;;
+</code></pre>
+<p>T表示函数类型，ret-type(paramlist). 例如function&lt;int(int,int)>表示返回值为int，入参为int，int的函数类型。</p>
+<pre><code class=language-cpp>#include &lt;iostream&gt;
+#include &lt;functional&gt;
+#include &lt;string&gt;
+using std::string;
+using std::function;
+
+//普通函数
+size_t func(const string&amp; a){
+    std::cout &lt;&lt; &quot;func:&quot; &lt;&lt; std::endl;
+    return a.size();
+}
+
+//函数指针
+size_t (*funcp)(const string&amp; a) = func;
+
+//类重载了operator()运算符，即对象的行为跟函数一样，除此之外，也可以包含其他成员
+struct FuncA {
+    FuncA():name(&quot;default instance&quot;){}
+    size_t operator()(const string&amp;a){
+        std::cout &lt;&lt; &quot;FuncA instance &quot; &lt;&lt; name &lt;&lt; &quot;'s operator()&quot; &lt;&lt; std::endl;
+        return a.size();
+    }
+    string name;
+};
+
+int main()
+{
+    //使用funciton来统一调用
+    std::function&lt;size_t(const string&amp;)&gt; mofun;
+    mofun = func;
+    string cs(&quot;nice ok&quot;);
+    std::cout &lt;&lt; mofun(cs)&lt;&lt; std::endl;
+    mofun = funcp;
+    std::cout &lt;&lt; mofun(cs)&lt;&lt; std::endl;
+    mofun = [](const string&amp; a)-&gt;size_t {
+        std::cout &lt;&lt; &quot;lambda:&quot; &lt;&lt; std::endl;
+        return a.size();
+    };
+    string az(&quot;nice to see you&quot;);
+    std::cout &lt;&lt; mofun(az) &lt;&lt; std::endl;
+    mofun = FuncA();//创建了一个FuncA类型的临时对象，等价于
+    // FuncA tmp;
+    // mofun = tmp;
+    std::cout &lt;&lt; mofun(az) &lt;&lt; std::endl;
+    return 0;
+}
+</code></pre>
+<p>·除此之外，还有bind，它也在functional头文件中。可以将其视作函数适配器，用来对原函数进行<strong>形参位置、个数调整</strong>从而产生新的可调用对象。调用形式如下：</p>
+<pre><code class=language-cpp>auto newCallable=bind(callable, args_list)
+</code></pre>
+<p>args_list可能包含形如_n的名字，这些参数都是指占位符，数字n表示 <strong>新的</strong>可调用对象中的参数位置，从1开始。</p>
+<pre><code class=language-cpp>#include &lt;iostream&gt;
+#include &lt;functional&gt;
+#include &lt;string&gt;
+using std::string;
+void funN(const string&amp;a, const string&amp;b) {
+    swap(a,b);
+    std::cout &lt;&lt; a &lt;&lt; &quot; &quot; &lt;&lt; b &lt;&lt; std::endl;
+}
+
+int main(){
+    string az(&quot;Love&quot;);
+    string cs(&quot;You&quot;);
+    funN(az, cs);
+    std::function&lt;int(int,int)&gt; func;
+    auto newCallable = bind(funN, std::placeholders::_2, std::placeholders::_1);
+    newCallable(az, cs);
+    //修改入参个数
+    auto onlyOne = bind(funN, az, std::placeholders::_1);
+    string c(&quot;world&quot;);
+    onlyOne(c);    
+    //如果bind中使用的是引用类型变量，必须加上std::ref,否则函数使用的是右值，不改变原有值
+    std::cout &lt;&lt; &quot;az: &quot; &lt;&lt; az &lt;&lt; &quot;, c: &quot; &lt;&lt; c &lt;&lt; std::endl;//az并不变,但是c变了
+    //使用std::ref即可
+    onlyOne2 = bind(funN, std::ref(az), std::placeholders::_1);
+    c=&quot;world&quot;;
+    onlyOne2(c);     
+  //如果bind中使用的是引用类型变量，必须加上std::ref,否则函数使用的是右值，不改变原有值
+    std::cout &lt;&lt; &quot;az: &quot; &lt;&lt; az &lt;&lt; &quot;, c: &quot; &lt;&lt; c &lt;&lt; std::endl;//az也改变,c也变了  
+    return 0;
+}
+</code></pre>
+</div>
+<div class=article-footer>
+<blockquote class=mt-2x>
+<ul class="post-copyright list-unstyled">
+<li class="post-copyright-link hidden-xs">
+<strong>Permalink: </strong>
+<a href=https://ketop.github.io/2020/12/callable/ title=C++可调用对象 target=_blank rel=external>https://ketop.github.io/2020/12/callable/</a>
+</li>
+<li class=post-copyright-license>
+<strong>License：</strong><a href=http://creativecommons.org/licenses/by/4.0/deed.zh target=_blank rel=external>CC BY 4.0 CN</a>
+</li>
+</ul>
+</blockquote>
+<div class="panel panel-default panel-badger">
+<div class=panel-body>
+<figure class=media>
+<div class=media-left>
+<a href=https://github.com/ketop target=_blank class="img-burn thumb-sm visible-lg">
+<img src=https://ketop.github.io/avatar.png class="img-rounded w-full" alt>
+</a>
+</div>
+<div class=media-body>
+<h3 class=media-heading><a href=https://github.com/ketop target=_blank><span class=text-dark>ketop</span><small class=ml-1x>Happy work,happy life.</small></a></h3>
+<div>Keep hungry, keep foolish.</div>
+</div>
+</figure>
+</div>
+</div>
+</div>
+</article>
+<section id=comments>
+<div id=vcomments></div>
+</section>
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+<div class=bar-inner>
+<ul class="pager pull-left">
+<li class=prev>
+<a href=https://ketop.github.io/2020/09/2020-09-17-travis-ci/ title="使用travis ci自动化发布hugo博客"><i class="icon icon-angle-left" aria-hidden=true></i><span>&nbsp;&nbsp;Older</span></a>
+</li>
+<li class=next>
+<a href=https://ketop.github.io/2021/01/wsl/ title="win10 wsl"><span>Newer&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden=true></i></a>
+</li>
+<li class=toggle-toc>
+<a class="toggle-btn collapsed" data-toggle=collapse href=#collapseToc aria-expanded=false title=Catalogue role=button>
+<span>[&nbsp;</span><span>Catalogue</span>
+<i class="text-collapsed icon icon-anchor"></i>
+<i class="text-in icon icon-close"></i>
+<span>]</span>
+</a>
+</li>
+</ul>
+<div class=bar-right>
+<div class=share-component data-sites=weibo,qq,wechat,facebook,twitter data-mobile-sites=weibo,qq,qzone></div>
+</div>
+</div>
+</nav>
+</main><footer class=footer itemscope itemtype=http://schema.org/WPFooter>
+<ul class=social-links>
+<li><a href=https://github.com/ketop target=_blank title=github data-toggle=tooltip data-placement=top>
+<i class="icon icon-github"></i></a></li>
+<li><a href=https://ketop.github.io/index.xml target=_blank title=rss data-toggle=tooltip data-placement=top>
+<i class="icon icon-rss"></i></a></li>
+<li><a href=http://weibo.com/duke47 target=_blank title=weibo data-toggle=tooltip data-placement=top>
+<i class="icon icon-weibo"></i></a></li>
+</ul>
+<div class=copyright>
+&copy;2017 -
+2022
+<div class=publishby>
+Theme by <a href=https://github.com/xiaoheiAh target=_blank> xiaoheiAh </a>base on<a href=https://github.com/xiaoheiAh/hugo-theme-pure target=_blank> pure</a>.
+</div>
+</div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type=text/x-mathjax-config>
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+<script async src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script>
+<script>mermaid.initialize({startOnLoad:!0})</script>
+<script>Array.from(document.getElementsByClassName('language-mermaid')).forEach(a=>{a.parentElement.outerHTML=`<div class="mermaid">${a.innerText}</div>`})</script>
+<style>.mermaid svg{display:block;margin:auto}</style>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js></script>
+<script>window.jQuery||document.write('<script src="js/jquery.min.js"><\/script>')</script>
+<script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js></script>
+<script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js defer></script>
+<script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js defer></script><script>hljs.configure({tabReplace:'    ',classPrefix:''}),hljs.initHighlightingOnLoad()</script>
+<script src=https://ketop.github.io/js/application.min.a94ab19cb63a95c8d7fbd7b85cab3ddeea8c369bdf75b9cab6708787ead123af.js></script>
+<script src=https://ketop.github.io/js/plugin.min.19c5bcb2fb0789ab4f2b7834e5ceb5e92635645605bab902c1024b25f1502364.js></script>
+<script>(function(a){var b={TRANSLATION:{POSTS:'Posts',PAGES:'Pages',CATEGORIES:'Categories',TAGS:'Tags',UNTITLED:'(Untitled)'},ROOT_URL:'https://ketop.github.io',CONTENT_URL:'https://ketop.github.io/searchindex.json '};a.INSIGHT_CONFIG=b})(window)</script>
+<script type=text/javascript src=https://ketop.github.io/js/insight.min.4a2d52de4bfff73e0c688404fe3d17c9a3ae12d9888e1e1ac9c690e4890de2ded50fe55f2b819c2ba55435a76f396f3ea6805765f0b0af5635cdf74ea459eab0.js defer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js></script>
+<script>tocbot.init({tocSelector:'.js-toc',contentSelector:'.js-toc-content',headingSelector:'h1, h2, h3',hasInnerContainers:!0})</script>
+<script src=https://cdn1.lncld.net/static/js/3.0.4/av-min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/valine></script>
+<script type=text/javascript>var GUEST=['nick','mail','link'],meta='nick,mail';meta=meta.split(',').filter(function(a){return GUEST.indexOf(a)>-1}),new Valine({el:'#vcomments',verify:null,notify:null,appId:'PckM8uefuLOV4IdD8e5jejur-gzGzoHsz',appKey:'I7jd25YaeamuXrH0Q7L1YmR1',placeholder:'useful~',avatar:'mm',meta,pageSize:'10'||10,visitor:!1})</script>
+</body>
+</html>
